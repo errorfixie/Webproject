@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "C:\\Users\\USER\\.virtualenvs\\web_project-pyKUGi9x\\Scripts\\python.exe",
+    "python.pythonPath": "/usr/local/bin/python3",
     "python.linting.pylintEnabled": false,
     "python.linting.flake8Enabled": true,
     "python.linting.enabled": true,
