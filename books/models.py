@@ -48,7 +48,7 @@ class Book(models.Model):
     bookPic = models.ImageField(
         verbose_name="도서사진", upload_to="books/%Y/%m/%d", blank=True
     )
-    publisherDate = models.DateField(verbose_name="출판일", auto_now_add=True)
+    publisherDate = models.DateField(verbose_name="출판일")
 
     def __str__(self):
         return self.bookTitle
