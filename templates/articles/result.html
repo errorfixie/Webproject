@@ -1,23 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>이달의행사검색결과</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block content %}
 <div>
 <h1>행사검색결과!!(제목)</h1>
 </div>
 
 <div>
-<h2>기사카테고리별 드롭박스</h2>
+<h4>기사카테고리별 드롭박스</h4>
     <a href = "{%url 'articles:author' %}">이달의작가</a><br>
     <a href = "{%url 'articles:book' %}">이달의도서</a><br>
     <a href = "{%url 'articles:event' %}">이달의행사</a><br>
 </div>
 
-<div>본문
+<div>
+    <h4>본문</h4>
     {%for post in page_obj%}
         사진:<img src = '{{post.eventArticlePic.url}}'  width='200',height='150'> - 기사제목: {{post.articleTitle}}<br>
             행사이름 : {{post.eventName}}<br>
@@ -46,7 +42,4 @@
         {% endif %}
     </span>
 </div>
-</body>
-</html>
-
-
+{% endblock content %}
