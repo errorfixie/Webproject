@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>도서상세정보</title>
+    <style>
+        ul li {list-style-type: none;}
+    </style>
 </head>
 <body>
     {% extends 'base.html' %}
@@ -12,12 +15,10 @@
         {% if book_detail %}
             <h4>{{book_detail.bookTitle}}</h4>
             <ul>
-                {% if book_detail.bookPic %}
-                    <img src="{{ book_detail.bookPic.url }}" width=120> <br>
-                {% endif %}
+                <img src="{{ book_detail.bookPic.url }}" width=150 align="left" hspace="10">
                 <li>작가 : {{ book_detail.authorID }}</li> <br>
                 <li>출판사 : {{book_detail.publisherID }}</li> <br>
-                <li>출판년도 : {{ book_detail.publisherDate }}</li> <br>
+                <li>출판년도 : {{ book_detail.publisherDate|date:"Y" }} 년</li> <br>
                 <li>가격 : {{ book_detail.price }} 원</li> <br>
                 <li>분류 : {{ book_detail.bookCategoryID }}</li> <br>
                 {{ book_detail.bookExp }}
