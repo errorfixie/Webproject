@@ -10,8 +10,7 @@ from datetime import datetime
 def ThisMonthBookView(request): 
     book_info_date_year = []
     book_info_date_month = []
-    book_info = Article.objects.filter(articleCategory="book").order_by('articleDate')
-
+    book_info = Article.objects.filter(articleCategory="book").order_by('-articleDate') #내림차순인 이유는 최신을 가장 먼저보여줘야하기 때문
     for i in book_info:
         year = i.articleDate.year
         month = i.articleDate.month
@@ -23,11 +22,13 @@ def ThisMonthBookView(request):
 
     if request.GET.get('cate_year'):
         page_year = request.GET.get('cate_year')
-        book_info = Article.objects.filter(articleCategory="book",articleDate__year=page_year)
+        book_info = Article.objects.filter(articleCategory="book",articleDate__year=page_year).order_by('-articleDate')
     elif request.GET.get('cate_month'):
         page_month = request.GET.get('cate_month')
-        book_info = Article.objects.filter(articleCategory="book",articleDate__month=page_month)
-    
+        book_info = Article.objects.filter(articleCategory="book",articleDate__month=page_month).order_by('-articleDate')
+#   카테고리는 이렇게 복잡하게 할 필요없이 Book테이블과 join하고 group_by로 묶자
+#   elif request.GET.get('cate_book'):
+#       book_info = Article.objects.filter(articleCategory="book").select_related('bookID').value("bookCategoryID").order_by('-articleDate')
     paginator = Paginator(book_info, 3)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)

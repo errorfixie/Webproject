@@ -7,8 +7,8 @@
 
 <div>
     <h4>책카테고리별(아직안함)</h4>    
-    <!--{% for book in page_obj.book_set.all %}
-        카테고리: {{book.bookCategoryID}}
+    <!--{% book for page_obj %}
+        <a href = "?cate_book={{book.bookCategoryID}}">{{book.bookCategoryID}}</a>
     {% endfor %}-->
     연도별 : {% for year in book_info_date_year%}
         <a href = "?cate_year={{year}}">{{year}}</a><br>
