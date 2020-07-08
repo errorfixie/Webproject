@@ -1,29 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>전체도서</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>전체도서</h2>
+
+{% if total_book_list %}
     <div>
-        <h2>전체도서</h2>
-        {% if total_book_list %}
-            <ul>
-            {% for book_list in total_book_list %}
-                <li><a href="">
-                        {% if book_list.bookPic %}
-                            <img src="{{ book_list.bookPic.url }}" width=150> <br>
-                        {% endif %}
-                        {{ book_list.bookTitle }} <br>
-                        \ {{ book_list.price }}
-                    </a>
-                </li>
-            {% endfor %}
-            </ul>
-        {% else %}
-            <p>도서가 존재하지 않습니다.</p>
-        {% endif %}
+    {% for book_list in total_book_list %}
+        <li><a href="">
+                {% if book_list.bookPic %}
+                    <img src="{{ book_list.bookPic.url }}" width=150> <br>
+                {% endif %}
+                {{ book_list.bookTitle }} <br>
+                \ {{ book_list.price }}
+            </a>
+        </li>
+    {% endfor %}
     </div>
-</body>
-</html>
+{% else %}
+    <p>도서가 존재하지 않습니다.</p>
+{% endif %}
+
+{% endblock content %}
