@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이달의작가</title>
+</head>
+
+<body>
+
+<div>
+    <h1>이달의작가페이지(제목)</h1>
+</div>
+
+
+    <h2>기사카테고리별 드롭박스</h2>
+    <a href = "{%url 'articles:author' %}">이달의작가</a><br>
+    <a href = "{%url 'articles:book' %}">이달의도서</a><br>
+    <a href = "{%url 'articles:event' %}">이달의행사</a><br>
+</div>
+
+<div>제목
+    {% for author in author_info  %}
+        <br>사진 : <a href = ""><img src = '{{ author.authorArticlePic.url }}' width='300',height='350'> </a>
+        <br>기사제목 : {{author.articleTitle}}
+        <br>기사내용 : {{author.articleExp}}
+        기사등록시간 : {{author.articleDate}}<br> 
+    {% endfor %}
+</div>
+
+<div>
+    <h3>작가명, 소개</h3>
+</div>
+
+</body>
+</html>
