@@ -1,0 +1,13 @@
+{% comment %} {% extends 'base.html' %} {% endcomment %}
+
+{% block content %}
+
+<h3>{{ books.bookTitle }}</h3>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>
+
+
+{% endif %}
+
+{% endblock content %}
+
