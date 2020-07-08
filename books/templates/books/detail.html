@@ -1,13 +1,32 @@
-{% comment %} {% extends 'base.html' %} {% endcomment %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>도서상세정보</title>
+    <style>
+        ul li {list-style-type: none;}
+    </style>
+</head>
+<body>
+    {% extends 'base.html' %}
 
-{% block content %}
-
-<h3>{{ books.bookTitle }}</h3>
-
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>
-
-
-{% endif %}
-
-{% endblock content %}
+    {% block content %}
+        {% if book_detail %}
+            <h4>{{book_detail.bookTitle}}</h4>
+            <ul><li>
+                {% if book_detail.bookPic %}
+                    <img src="{{ book_detail.bookPic.url }}" width=120> <br>
+                {% endif %}
+                분류 : {{ book_detail.bookCategoryID }} <br>
+                가격 : {{ book_detail.price }} 원 <br>
+                작가 : {{ book_detail.authorID }} <br>
+                출판사 : {{book_detail.publisherID }} <br>
+                출판년도 : {{ book_detail.publisherDate }} <br>
+                도서설명 : {{ book_detail.bookExp }}
+            </li></ul>
+        {% endif %}
+    {% endblock content %}
+</body>
+</html>
 

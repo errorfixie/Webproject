@@ -11,6 +11,6 @@ class BookList(generic.ListView):
     context_object_name = 'total_book_list'
 
 class BookDetailView(generic.DetailView):
-    # queryset = Book.objects.all()
+    queryset = Book.objects.all()
     template_name = 'books/detail.html'
     context_object_name = 'book_detail'
