@@ -20,6 +20,4 @@ def BookSearchList(request):
     q = request.GET.get('q', '')
     if q:
         qs = qs.filter(bookTitle__icontains=q)
-    return render(request, 'books/search.html',
-           {'search': qs,
-            'q': q,})
+    return render(request, 'books/search.html', {'search': qs, 'q': q,})

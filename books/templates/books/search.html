@@ -27,7 +27,7 @@
     {% if search %}
         <div><ul>
             {% for book_list in search %}
-                <li><a href="/books/search/{{ q }}">
+                <li><a href="/books/{{ book_list.id }}">
                     {% if book_list.bookPic %}
                         <img src="{{ book_list.bookPic.url }}" width=120> <br>
                     {% endif %}
