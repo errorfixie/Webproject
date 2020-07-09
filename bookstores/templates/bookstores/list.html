@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}동네책방{% endblock title %}
+
+{% block content %}
+    {% comment %} 검색기능 {% endcomment %}
+    {% comment %} 책방 사진 {% endcomment %}
+
+    <h2>동네 책방</h2>
+
+    <table class='table'>
+        <thead>
+            <tr>
+                <th>서점</th>
+                <th>주소</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for bookstore in bookstore_list %}
+                <tr>
+                    <td>
+                        <a href="{% url 'bookstores:detail' bookstore.pk %}">
+                        {{bookstore.bookstoreName}}
+                        </a>
+                    </td>
+                    <td>{{bookstore.bookstoreExp}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+    {% comment %} <div>
+        <span>
+            {% if page_obj.has_previous %}
+                <a href="?page={{page_obj.previous_page_number}}">이전</a>
+            {% endif %}
+
+            Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}
+
+            {% if page_obj.has_next %}
+                <a href="?page={{page_obj.next_page_number}}">다음</a>
+            {% endif %}
+        </span>
+    </div> {% endcomment %}
+
+{% endblock content %}
+

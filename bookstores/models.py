@@ -12,3 +12,4 @@ class Bookstore(models.Model):
 
     def __str__(self):
         return self.bookstoreName
+

@@ -22,6 +22,7 @@ from . import views
 urlpatterns = [
     path("", views.test, name="home"),
     path("admin/", admin.site.urls),
+    path("bookstores/", include('bookstores.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
