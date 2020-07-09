@@ -40,6 +40,30 @@
         <p>도서가 존재하지 않습니다.</p>
     {% endif %}
 
+    {% if is_paginated %}
+    <p>
+    <!--이전 페이지 그룹으로 이동-->
+    {% if has_previous_page %}
+        <a href="/books/?page={{ previous_page }}">이전</a>
+    {% endif %}
+    <!--페이지 번호 링크-->
+    {% for page in current_page_group_range %}
+    {% comment %} page_obj.number: 현재 보고있는 페이지 {% endcomment %}
+        {% if page == page_obj.number %}
+            {{ page }}
+        {% else %}
+            <a href="/books/?page={{ page }}">
+                {{ page }} &nbsp;&nbsp;&nbsp;
+            </a>
+        {% endif %}
+    {% endfor %}
+    <!--다음 페이지 그룹으로 이동-->
+    {% if has_next_page %}
+        <a href="/books/?page={{ next_page }}">다음</a>
+    {% endif %}
+    </p>
+    {% endif %}
+
     {% endblock content %}
 </body>
 </html>
