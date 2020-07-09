@@ -4,6 +4,8 @@ from books import views
 urlpatterns = [
     # books/
     path('', views.BookList.as_view(), name='list'),
+    # books/search/
+    path('search/', views.BookSearchList, name='search'),
     # books/도서ID/
     path('<int:pk>/', views.BookDetailView.as_view(), name='detail'),
 ]

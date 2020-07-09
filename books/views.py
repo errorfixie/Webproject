@@ -14,3 +14,12 @@ class BookDetailView(generic.DetailView):
     queryset = Book.objects.all()
     template_name = 'books/detail.html'
     context_object_name = 'book_detail'
+
+def BookSearchList(request):
+    qs = Book.objects.all()
+    q = request.GET.get('q', '')
+    if q:
+        qs = qs.filter(bookTitle__icontains=q)
+    return render(request, 'books/search.html',
+           {'search': qs,
+            'q': q,})

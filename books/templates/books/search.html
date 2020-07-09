@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>전체도서</title>
+    <title>도서검색결과</title>
     <style>
         ul li {list-style-type: none; float: left; margin-left: 25px;}
         a:link {color: black; text-decoration: none;}
@@ -13,21 +13,21 @@
 </head>
 <body>
     {% extends 'base.html' %}
-
+    
     {% block content %}
 
     <form action="/books/search/" method='GET'>
-    {% csrf_token %}
+        {% csrf_token %}
         <input type='search' name='q' value='{{ q }}'>
         <input type='submit' value='검색'>
     </form>
+        
+    <h3>도서검색결과</h3>
 
-    <h3>전체도서</h3>
-
-    {% if total_book_list %}
+    {% if search %}
         <div><ul>
-            {% for book_list in total_book_list %}
-                <li><a href="/books/{{ book_list.id }}">
+            {% for book_list in search %}
+                <li><a href="/books/search/{{ q }}">
                     {% if book_list.bookPic %}
                         <img src="{{ book_list.bookPic.url }}" width=120> <br>
                     {% endif %}
