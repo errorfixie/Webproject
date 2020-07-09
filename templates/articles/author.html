@@ -18,11 +18,16 @@
         <br>사진 : <a href = ""><img src = '{{ author.authorArticlePic.url }}' width='300',height='350'> </a>
         <br>기사제목 : {{author.articleTitle}}
         <br>기사내용 : {{author.articleExp}}
-        기사등록시간 : {{author.articleDate}}<br> 
+        <br>기사등록시간 : {{author.articleDate}}
     {% endfor %}
 </div>
 
 <div>
     <h3>작가명, 소개</h3>
+    {% for author in author_info  %}
+    저자명: {{author.authorID}}<br>
+    저자설명 : {{author.authorID.authorExp}}<br>
+    저자이메일 : {{author.authorID.authorEmail}}<br>
+    {% endfor %}
 </div>
 {% endblock content %}

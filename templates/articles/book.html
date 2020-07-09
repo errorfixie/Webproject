@@ -6,16 +6,19 @@
 </div>
 
 <div>
-    <h4>책카테고리별(아직안함)</h4>    
-    <!--{% book for page_obj %}
-        <a href = "?cate_book={{book.bookCategoryID}}">{{book.bookCategoryID}}</a>
-    {% endfor %}-->
-    연도별 : {% for year in book_info_date_year%}
+    <h4>카테고리</h4>
+    책카테고리별 :   
+        {% for book in book_cate %}
+        <a href = "?cate_book={{book.bookID.bookCategoryID.pk}}">{{book.bookID.bookCategoryID}}</a>
+        {% endfor %}<br>
+    연도별 : 
+        {% for year in book_info_date_year%}
         <a href = "?cate_year={{year}}">{{year}}</a><br>
-    {%endfor%}
-    월별분류 : {% for month in book_info_date_month%}
+        {%endfor%}
+    월별분류 : 
+        {% for month in book_info_date_month%}
         <a href = "?cate_month={{month}}">{{month}}</a><br>
-    {%endfor%}
+        {%endfor%}
 </div>
     
 <div>
@@ -32,6 +35,7 @@
         기사이름 : {{book.articleTitle}}<br>
         기사내용 : {{book.articleExp}}<br>
         기사등록시간 : {{book.articleDate}}<br> 
+
     {% endfor %}
 
 

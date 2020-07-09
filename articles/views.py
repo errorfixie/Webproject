@@ -7,33 +7,46 @@ from datetime import datetime
 # 이달의 도서 
 # 필요 요소: 도서 사진, 기사 제목, 기사 내용, 등록일자, 도서카테고리, 기사카테고리
 # 기능 : 기사카테고리 드롭박스, 페이지네이션, 도서카테고리 박스 - 카테고리 별 filter, 등록일자 년 박스, 등록일자 월 박스
-def ThisMonthBookView(request): 
+def ThisMonthBookView(request):
+    # 연,월 카테고리 변수 선언
     book_info_date_year = []
     book_info_date_month = []
+
     book_info = Article.objects.filter(articleCategory="book").order_by('-articleDate') #내림차순인 이유는 최신을 가장 먼저보여줘야하기 때문
+
     for i in book_info:
         year = i.articleDate.year
         month = i.articleDate.month
         book_info_date_year.append(year)
         book_info_date_month.append(month)
 
+    #연월 카테고리 변수 완성
     book_info_date_year = set(book_info_date_year)
     book_info_date_month = set(book_info_date_month)
 
+    #GET으로 오는 값에 따른 카테고리분류 
     if request.GET.get('cate_year'):
         page_year = request.GET.get('cate_year')
         book_info = Article.objects.filter(articleCategory="book",articleDate__year=page_year).order_by('-articleDate')
     elif request.GET.get('cate_month'):
         page_month = request.GET.get('cate_month')
         book_info = Article.objects.filter(articleCategory="book",articleDate__month=page_month).order_by('-articleDate')
-#   카테고리는 이렇게 복잡하게 할 필요없이 Book테이블과 join하고 group_by로 묶자
-#   elif request.GET.get('cate_book'):
-#       book_info = Article.objects.filter(articleCategory="book").select_related('bookID').value("bookCategoryID").order_by('-articleDate')
-    paginator = Paginator(book_info, 3)
+    elif request.GET.get('cate_book'):
+        page_book = request.GET.get('cate_book')
+        book_info = Article.objects.filter(articleCategory="book",bookID__bookCategoryID__pk=page_book).order_by('-articleDate')
+    
+    #페이지네이션작업
+    paginator = Paginator(book_info, 3) 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+    
+    # 페이지가 달라져도 카테고리를 유지하기 위한 쿼리셋
+    book_cate = Article.objects.filter(articleCategory="book").order_by('-articleDate') #
 
-    return render(request,"articles/book.html",{"page_obj":page_obj,"book_info_date_year":book_info_date_year,"book_info_date_month":book_info_date_month})
+    return render(request,"articles/book.html",{"page_obj":page_obj,
+                                                "book_info_date_year":book_info_date_year,
+                                                "book_info_date_month":book_info_date_month,
+                                                "book_cate":book_cate,})
 # 이달의 행사
 # 필요 요소: 행사사진, 행사 이름, 기사 내용, 등록일자, 기사카테고리 
 # 기능 : 기사카테고리 드롭박스, 검색도구, 페이지네이션
