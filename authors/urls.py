@@ -1,5 +1,7 @@
 from django.urls import path
+from authors import views
 
 
-urlpatterns = []
-
+urlpatterns = [
+    path("<int:pk>/", views.author, name="author"),
+]

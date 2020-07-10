@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>세모작가 게시판</title>
+{% endblock title %}
+
+{% block content %}
+
+{% for writerblog in object_list %}
+    <img src="{{ writerblog.postPic.url }}"> <h3>{{writerblog.postTitle}}</h3>
+    <br>{{writerblog.postExp|truncatechars:30}} / {{writerblog.postDate}}
+{% endfor %}
+
+{% endblock content %}
