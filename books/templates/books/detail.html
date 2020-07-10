@@ -12,20 +12,24 @@
     {% extends 'base.html' %}
 
     {% block content %}
-        {% if book_detail %}
-            <h4>{{book_detail.bookTitle}}</h4>
-            <ul>
-                <img src="{{ book_detail.bookPic.url }}" width=150 align="left" hspace="10">
-                <li>작가 : {{ book_detail.authorID }}</li>
-                {% comment %} if문 사용 - 작가페이지 있을 경우에만 나오도록 설정해야 함. {% endcomment %}
-                <input type="button" name="btn1" value="작가페이지"><br>
-                <li>출판사 : {{book_detail.publisherID }}</li> <br>
-                <li>출판년도 : {{ book_detail.publisherDate|date:"Y" }} 년</li> <br>
-                <li>가격 : {{ book_detail.price }} 원</li> <br>
-                <li>분류 : {{ book_detail.bookCategoryID }}</li> <br>
-                {{ book_detail.bookExp }}
-            </ul>
-        {% endif %}
+
+    <h3>도서상세정보</h3>
+    
+    {% if book_detail %}
+        <h4>{{book_detail.bookTitle}}</h4>
+        <ul>
+            <img src="{{ book_detail.bookPic.url }}" width=150 align="left" hspace="10">
+            <li>작가 : {{ book_detail.authorID }}</li>
+            {% comment %} if문 사용 - 작가페이지 있을 경우에만 나오도록 설정해야 함. {% endcomment %}
+            <input type="button" name="btn1" value="작가페이지"><br>
+            <li>출판사 : {{book_detail.publisherID }}</li> <br>
+            <li>출판년도 : {{ book_detail.publisherDate|date:"Y" }} 년</li> <br>
+            <li>가격 : {{ book_detail.price }} 원</li> <br>
+            <li>분류 : {{ book_detail.bookCategoryID }}</li> <br>
+            {{ book_detail.bookExp }}
+        </ul>
+    {% endif %}
+
     {% endblock content %}
 </body>
 </html>

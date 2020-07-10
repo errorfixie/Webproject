@@ -17,27 +17,50 @@
     {% block content %}
 
     <form action="/books/search/" method='GET'>
-        {% csrf_token %}
         <input type='search' name='q' value='{{ q }}'>
         <input type='submit' value='검색'>
     </form>
-        
+
     <h3>도서검색결과</h3>
 
-    {% if search %}
+    {% if book_search %}
         <div><ul>
-            {% for book_list in search %}
-                <li><a href="/books/{{ book_list.id }}">
-                    {% if book_list.bookPic %}
-                        <img src="{{ book_list.bookPic.url }}" width=120> <br>
+            {% for search in book_search %}
+                <li><a href="/books/{{ search.id }}">
+                    {% if search.bookPic %}
+                        <img src="{{ search.bookPic.url }}" width=120> <br>
                     {% endif %}
-                    <b>{{ book_list.bookTitle }}</b><br>
-                    \ {{ book_list.price }}
+                    <b>{{ search.bookTitle }}</b><br>
+                    \ {{ search.price }}
                 </a></li>
             {% endfor %}
         </ul></div>
     {% else %}
         <p>도서가 존재하지 않습니다.</p>
+    {% endif %}
+
+    {% if is_paginated %}
+    <p>
+    <!--이전 페이지 그룹으로 이동-->
+    {% if has_previous_page %}
+        <a href="/books/search/?q={{ request.GET.q }}&page={{ previous_page }}">이전</a>
+    {% endif %}
+    <!--페이지 번호 링크-->
+    {% for page in current_page_group_range %}
+    {% comment %} page_obj.number: 현재 보고있는 페이지 {% endcomment %}
+        {% if page == page_obj.number %}
+            {{ page }}
+        {% else %}
+            <a href="/books/search/?q={{ request.GET.q }}&page={{ page }}">
+                {{ page }} &nbsp;&nbsp;
+            </a>
+        {% endif %}
+    {% endfor %}
+    <!--다음 페이지 그룹으로 이동-->
+    {% if has_next_page %}
+        <a href="/books/search/?q={{ request.GET.q }}&page={{ next_page }}">다음</a>
+    {% endif %}
+    </p>
     {% endif %}
 
     {% endblock content %}
