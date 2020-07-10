@@ -16,7 +16,7 @@ class User(AbstractUser):
     )
 
     def __str__(self):
-        return self.ID
+        return self.username
 
     def delete(self, *args, **kargs):
         os.remove(os.path.join(settings.MEDIA_ROOT, self.userPic.path))
