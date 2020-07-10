@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+    <h1>이달의도서페이지(제목)</h1><br>
+</div>
+
+<div>
+    <h4>카테고리</h4>
+    책카테고리별 :   
+        {% for book in book_cate %}
+        <a href = "?cate_book={{book.bookID.bookCategoryID.pk}}">{{book.bookID.bookCategoryID}}</a>
+        {% endfor %}<br>
+    연도별 : 
+        {% for year in book_info_date_year%}
+        <a href = "?cate_year={{year}}">{{year}}</a><br>
+        {%endfor%}
+    월별분류 : 
+        {% for month in book_info_date_month%}
+        <a href = "?cate_month={{month}}">{{month}}</a><br>
+        {%endfor%}
+</div>
+    
+<div>
+    <h4>기사카테고리별 드롭박스</h4> 
+    <a href = "{%url 'articles:author' %}">이달의작가</a><br>
+    <a href = "{%url 'articles:book' %}">이달의도서</a><br>
+    <a href = "{%url 'articles:event' %}">이달의행사</a><br>
+</div>
+    
+<div>
+    <h4>내용</h4>
+    {% for book in page_obj %}
+        사진: <img src="{{book.bookArticlePic.url}}" width='300',height='350'> <br>
+        기사이름 : {{book.articleTitle}}<br>
+        기사내용 : {{book.articleExp}}<br>
+        기사등록시간 : {{book.articleDate}}<br> 
+
+    {% endfor %}
+
+
+    <h3> 페이지네이션 </h3>
+    <div class = "pagination">
+    <span class="step-links">
+        {%if page_obj.has_previous%}
+            <a href ="?page=1">&laquo; first</a>
+            <a href ="?page={{page_obj.previous_page_number}}">previous</a>
+        {%endif%}
+
+        <span class="current">
+            Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href = "?page={{page_obj.next_page_number}}">next</a>
+            <a href = "?page={{page_obj.paginator.num_pages}}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock content %}
