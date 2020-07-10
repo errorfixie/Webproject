@@ -142,3 +142,4 @@ cython_debug/
 
 # Mac os
 .DS_Store
+media/

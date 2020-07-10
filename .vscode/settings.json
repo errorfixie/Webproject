@@ -1,7 +1,20 @@
 {
+<<<<<<< HEAD
     "python.pythonPath": "C:\\Users\\Playdata\\anaconda3\\envs\\django\\python.exe",
     "python.linting.pylintEnabled": false,
     "python.linting.flake8Enabled": false,
+=======
+<<<<<<< HEAD
+    "python.pythonPath": "/Users/jelly/opt/anaconda3/envs/django/bin/python",
+    "python.linting.pylintEnabled": true,
+    "python.linting.flake8Enabled": false,
+=======
+    "python.pythonPath": "/Users/seohilde/.local/share/virtualenvs/Webproject-VqGMykN2/bin/python",
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+>>>>>>> 05dfd84dc3efacc9df7c11c80bc0771303d03be0
+>>>>>>> f0906d247c1e5c102afc90ca7775f93221036f91
     "python.linting.enabled": true,
     "python.formatting.provider": "black",
+    "liveServer.settings.port": 5501,
 }
