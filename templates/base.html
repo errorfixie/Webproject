@@ -4,34 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>세모책방</title>
+    {% block title %}
+    {% endblock title %}
 </head>
 
 <body>
-    &copy; SemoBookstore<!--연습-->
-    <h3> 세상의 모든 독립출판을 위한<h1>세모 책방</h1><!--제목-->
-    <div><!--사이드 그리드-->
-        <input type="button" value="로그인" onClick="location.href=''">
-        <input type="button" value="회원가입" onClick="location.href=''">
-    </div>
-    <br>
-    <br>
-    <div><!--header 그리드-->
-        <input type="button" value="세모 책장" onClick="location.href=''">
-        <input type="button" value="이달의.." onClick="location.href=''">
-        <input type="button" value="동네 책방" onClick="location.href=''">
-        <input type="button" value="세모 작가" onClick="location.href=''">
-    </div>
-
+    {% include "partials/header.html" %}
     <br>
     <br>
     <br>
-
-
     {% block content %}
     <!--extends 사용하셔서 base.html 받으시면 여기에 내용이 들어갑니다!-->
     {% endblock content %}
-
+    <br>
+    <br>
+    {% include "partials/footer.html" %}
 </body>
 
 </html>
