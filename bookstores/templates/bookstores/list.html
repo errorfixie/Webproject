@@ -3,10 +3,26 @@
 {% block title %}동네책방{% endblock title %}
 
 {% block content %}
-    {% comment %} 검색기능 {% endcomment %}
-    {% comment %} 책방 사진 {% endcomment %}
 
     <h2>동네 책방</h2>
+
+    {% comment %} 검색기능 {% endcomment %}
+    <div>
+        <form action="/bookstores/search/" method='GET'>
+            {% csrf_token %}
+            <input type='search' name='q' value='{{ q }}'>
+            <input type='submit' value='검색'>
+        </form>
+    </div>
+
+    {% comment %} 책방 사진 / 이미지 크기 조정 {% endcomment %}
+    <div>
+        <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxOTA2MTZfODEg%2FMDAxNTYwNjkzMzAyMjQ5.LNZod6LIfNBkWv4Q0AQlUJLPoj4RQf2JxpsEP4hP2aUg.mc3Gyi8KLzgxe4gHftptBpsSMvZV2N9rf-Qe6wwf8uwg.JPEG.2519yk%2F20190616_135909.jpg&type=b400" style="width:300px; height:300px;">
+    </div>
+
+    {% comment %} 제보하기 {% endcomment %}
+    <input type="button" value="제보하기" onclick="location.href='create'">
+
 
     <table class='table'>
         <thead>
@@ -23,26 +39,39 @@
                         {{bookstore.bookstoreName}}
                         </a>
                     </td>
-                    <td>{{bookstore.bookstoreExp}}</td>
+                    <td>{{bookstore.bookstoreAddress}}</td>
                 </tr>
             {% endfor %}
         </tbody>
 
     </table>
 
-    {% comment %} <div>
-        <span>
-            {% if page_obj.has_previous %}
-                <a href="?page={{page_obj.previous_page_number}}">이전</a>
-            {% endif %}
+    {% comment %} 페이징 처리 {% endcomment %}
+    <div>
+        {% if is_paginated %}
+        <p>
+        {% if has_previous_page %}
+            <a href='/bookstores/?page={{previous_page}}'>이전</a>
+        {% endif %}
 
-            Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}
-
-            {% if page_obj.has_next %}
-                <a href="?page={{page_obj.next_page_number}}">다음</a>
+        {% for page in current_page_group_range %}
+            {% if page == page_obj.number %}
+                {{page}}
+            {% else %}
+                <a href='/bookstores/?page={{page}}'>
+                    {{page}} &nbsp;&nbsp;&nbsp;
+                </a>
             {% endif %}
-        </span>
-    </div> {% endcomment %}
+        {% endfor %}
+
+        {% if has_next_page %}
+            <a href='/bookstores/?page={{next_page}}'>다음</a>
+        {% endif %}
+
+        </p>
+        {% endif %}
+
+    </div>
 
 {% endblock content %}
 
