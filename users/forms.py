@@ -47,8 +47,8 @@ class CreateUserForm(UserCreationForm):
         return user
         
 class UserLoginForm(AuthenticationForm):
-    ID = forms.CharField(label = "회원ID", widget = forms.TextInput(attrs={'class':"form-control"}))
-    userPW = forms.CharField(label='비밀번호', strip=False, widget=forms.PasswordInput(attrs={'class':"form-control"}))
+    username = forms.CharField(label = "회원ID", widget = forms.TextInput(attrs={'class':"form-control"}))
+    password = forms.CharField(label='비밀번호', strip=False, widget=forms.PasswordInput(attrs={'class':"form-control"}))
 
 # class CustomUserChangeForm(UserChangeForm):
 #     class Meta:

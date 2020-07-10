@@ -16,7 +16,8 @@ class CreateUserView(CreateView):
 
 class CustomLoginView(LoginView):
     template_name = 'users/Login_Form.html'
-    form_class = AuthenticationForm
+    form_class = UserLoginForm
+    success_url = reverse_lazy('home')
 
 @login_required
 def update(request):
