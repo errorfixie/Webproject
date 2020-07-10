@@ -1,24 +1,22 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView
-from django.views.generic.views import LoginView
-from django.contrib.auth.forms import AuthenticationForm, UserChangeForm
-from .forms import CreateUserForm, UserLoginForm, LikebooksForm
-from django.core.urlresolvers import reverse_lazy
+from django.views.generic import TemplateView, CreateView
+from .forms import CreateUserForm, UserLoginForm
+from .models import User
+from django.urls import reverse_lazy
+
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import LoginView
+from django.contrib.auth.forms import AuthenticationForm, UserChangeForm, UserCreationForm
 
 class CreateUserView(CreateView):
-    template_name = 'users/join_form.html'
+    model = User
+    template_name = 'users/Join_Form.html'
     form_class = CreateUserForm
     success_url = reverse_lazy('home')
 
-    def likebookchoice(request):
-        context = {}
-        context['form'] = LikebooksForm()
-        return render(request, "Join_form.html", context)
-
 class CustomLoginView(LoginView):
-    template_name = 'users/login_form.html'
-    form_class = UserLoginForm
+    template_name = 'users/Login_Form.html'
+    form_class = AuthenticationForm
 
 @login_required
 def update(request):
@@ -29,4 +27,4 @@ def update(request):
             return redirect('accounts:people', request.user.username)
         else:
             user_change_form = CustomUserChangeForm(instance=request.user)
-            return render(request, 'usersa/update.html',{'user_change_form':user_change_form})
+            return render(request, 'users/update.html',{'user_change_form':user_change_form})

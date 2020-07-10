@@ -1,4 +1,11 @@
 from django.contrib import admin
-from . import models
+from django.contrib.auth.admin import UserAdmin
+from .forms import CreateUserForm
+from .models import User
 
-admin.site.register(models.User)
+# class CustomUserAdmin(UserAdmin):
+#     form = CreateUserForm
+
+    
+
+admin.site.register(User)

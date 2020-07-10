@@ -1,10 +1,10 @@
 import os
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
-
-class User(models.Model):
-    ID = models.CharField(verbose_name="회원ID", max_length=20, primary_key=True)
-    userPW = models.CharField(verbose_name="회원비밀번호", max_length=20)
+class User(AbstractUser):
+    # ID = models.CharField(verbose_name="회원ID", max_length=20, primary_key=True)
+    # userPW = models.CharField(verbose_name="회원비밀번호", max_length=20)
     nickName = models.CharField(verbose_name="닉네임", max_length=20)
     userEmail = models.EmailField(verbose_name="이메일", max_length=200)
     userAddress = models.CharField(verbose_name="주소", max_length=200)
@@ -25,4 +25,4 @@ class User(models.Model):
 
 class likebook(models.Model):
     userID = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    # bookCategoryID = models.ForeignKey("BookCategory", on_delete=models.CASCADE)
+    bookCategoryID = models.CharField(verbose_name="관심장르", max_length=20, null=True)

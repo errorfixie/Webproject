@@ -11,8 +11,9 @@
     &copy; SemoBookstore<!--연습-->
     <h3> 세상의 모든 독립출판을 위한<h1>세모 책방</h1><!--제목-->
     <div><!--사이드 그리드-->
-        <input type="button" value="로그인" onClick="location.href=''">
-        <input type="button" value="회원가입" onClick="location.href=''">
+        <!-- <a href='{%url "users:login" %}'>로그인</a>-->
+        <input type="button" value="로그인" onClick='location.href="{%url "users:login" %}"'>
+        <input type="button" value="회원가입" onClick='location.href="{%url "users:join" %}"'>
     </div>
     <br>
     <br>
