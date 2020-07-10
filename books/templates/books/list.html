@@ -17,7 +17,6 @@
     {% block content %}
 
     <form action="/books/search/" method='GET'>
-    {% csrf_token %}
         <input type='search' name='q' value='{{ q }}'>
         <input type='submit' value='검색'>
     </form>
