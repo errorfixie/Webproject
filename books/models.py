@@ -3,21 +3,7 @@ from authors import models as author_models
 
 
 class BookCategory(models.Model):
-
-    book_choices = [
-        ("humanities", "인문"),
-        ("sociology", "사회"),
-        ("poetry", "시집"),
-        ("prose", "산문"),
-        ("essay", "수필"),
-        ("novel", "소설"),
-        ("poem", "시"),
-        ("illustration", "삽화"),
-    ]
-
-    bookCategory = models.CharField(
-        verbose_name="카테고리이름", choices=book_choices, max_length=200
-    )
+    bookCategory = models.CharField(verbose_name="카테고리이름", max_length=200)
 
     def __str__(self):
         return self.bookCategory

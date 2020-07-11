@@ -41,6 +41,9 @@ class BookList(generic.ListView):
             context['has_next_page'] = has_next_page
             context['next_page'] = end_page.next_page_number
 
+        categoryList = BookCategory.objects.all()
+        context['categoryList'] = categoryList
+
         return context
 
 class BookSearchView(generic.ListView):
@@ -51,9 +54,14 @@ class BookSearchView(generic.ListView):
     def get_queryset(self):
         result = super(BookSearchView, self).get_queryset()
         query = self.request.GET.get('q')
+        query2 = self.request.GET.get('category')
+        print(query)
+        print(query2)
         if query:
             result = result.filter(Q(bookTitle__icontains=query))
-        
+        elif query2:
+            result = result.filter(Q(bookCategoryID=query2))
+
         return result
 
     # 한 페이지에 보여줄 데이터 수
@@ -86,10 +94,12 @@ class BookSearchView(generic.ListView):
             context['has_next_page'] = has_next_page
             context['next_page'] = end_page.next_page_number
 
+        categoryList = BookCategory.objects.all()
+        context['categoryList'] = categoryList
+
         return context
 
 class BookDetailView(generic.DetailView):
     queryset = Book.objects.all()
     template_name = 'books/detail.html'
     context_object_name = 'book_detail'
-   
