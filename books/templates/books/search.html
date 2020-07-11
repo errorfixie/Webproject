@@ -16,17 +16,24 @@
     
     {% block content %}
 
+    <div>
     <form action="/books/search/" method='GET'>
         <input type='search' name='q' value='{{ q }}'>
         <input type='submit' value='검색'>
     </form>
+    </div>
 
+    <div>
     {% include 'books/category_base.html' %}
+    </div>
 
+    <div>
     <h3>도서검색결과</h3>
+    </div>
 
+    <div>
     {% if book_search %}
-        <div><ul>
+        <ul>
             {% for search in book_search %}
                 <li><a href="/books/{{ search.id }}">
                     {% if search.bookPic %}
@@ -36,11 +43,13 @@
                     \ {{ search.price }}
                 </a></li>
             {% endfor %}
-        </ul></div>
+        </ul>
     {% else %}
         <p>도서가 존재하지 않습니다.</p>
     {% endif %}
+    </div>
 
+    <div>
     {% if is_paginated %}
     {% if request.GET.q%}
     <p>
@@ -89,6 +98,7 @@
     </p>
     {% endif %}
     {% endif %}
+    </div>
 
     {% endblock content %}
 </body>

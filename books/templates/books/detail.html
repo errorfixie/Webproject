@@ -13,8 +13,11 @@
 
     {% block content %}
 
+    <div>
     <h3>도서상세정보</h3>
-    
+    </div>
+
+    <div>
     {% if book_detail %}
         <h4>{{book_detail.bookTitle}}</h4>
         <ul>
@@ -29,6 +32,7 @@
             {{ book_detail.bookExp }}
         </ul>
     {% endif %}
+    </div>
 
     {% endblock content %}
 </body>
