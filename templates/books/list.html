@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>전체도서</title>
+    <style>
+        ul li {list-style-type: none; float: left; margin-left: 25px;}
+        a:link {color: black; text-decoration: none;}
+        a:visited {color: purple; text-decoration: none;}
+        a:hover {color: black; text-decoration: underline;}
+    </style>
+</head>
+<body>
+    {% extends 'base.html' %}
+
+    {% block content %}
+
+    <div>
+    <form action="/books/search/" method='GET'>
+        <input type='search' name='q' value='{{ q }}'>
+        <input type='submit' value='검색'>
+    </form>
+    </div>
+
+    <div>
+    {% include 'books/category_base.html' %}
+    </div>
+
+    <div>
+    <h3>전체도서</h3>
+    </div>
+
+    <div>
+    {% if total_book_list %}
+        <div><ul>
+            {% for book_list in total_book_list %}
+                <li><a href="/books/{{ book_list.id }}">
+                    {% if book_list.bookPic %}
+                        <img src="{{ book_list.bookPic.url }}" width=120> <br>
+                    {% endif %}
+                    <b>{{ book_list.bookTitle }}</b><br>
+                    \ {{ book_list.price }}
+                </a></li>
+            {% endfor %}
+        </ul></div>
+    {% else %}
+        <p>도서가 존재하지 않습니다.</p>
+    {% endif %}
+    </div>
+
+    <div>
+    {% if is_paginated %}
+    <p>
+    <!--이전 페이지 그룹으로 이동-->
+    {% if has_previous_page %}
+        <a href="/books/?page={{ previous_page }}">이전</a>
+    {% endif %}
+    <!--페이지 번호 링크-->
+    {% for page in current_page_group_range %}
+    {% comment %} page_obj.number: 현재 보고있는 페이지 {% endcomment %}
+        {% if page == page_obj.number %}
+            {{ page }}
+        {% else %}
+            <a href="/books/?page={{ page }}">
+                {{ page }} &nbsp;&nbsp;
+            </a>
+        {% endif %}
+    {% endfor %}
+    <!--다음 페이지 그룹으로 이동-->
+    {% if has_next_page %}
+        <a href="/books/?page={{ next_page }}">다음</a>
+    {% endif %}
+    </p>
+    {% endif %}
+    </div>
+
+    {% endblock content %}
+</body>
+</html>

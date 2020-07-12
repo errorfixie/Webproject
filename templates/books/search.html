@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>도서검색결과</title>
+    <style>
+        ul li {list-style-type: none; float: left; margin-left: 25px;}
+        a:link {color: black; text-decoration: none;}
+        a:visited {color: purple; text-decoration: none;}
+        a:hover {color: black; text-decoration: underline;}
+    </style>
+</head>
+<body>
+    {% extends 'base.html' %}
+    
+    {% block content %}
+
+    <div>
+    <form action="/books/search/" method='GET'>
+        <input type='search' name='q' value='{{ q }}'>
+        <input type='submit' value='검색'>
+    </form>
+    </div>
+
+    <div>
+    {% include 'books/category_base.html' %}
+    </div>
+
+    <div>
+    <h3>도서검색결과</h3>
+    </div>
+
+    <div>
+    {% if book_search %}
+        <ul>
+            {% for search in book_search %}
+                <li><a href="/books/{{ search.id }}">
+                    {% if search.bookPic %}
+                        <img src="{{ search.bookPic.url }}" width=120> <br>
+                    {% endif %}
+                    <b>{{ search.bookTitle }}</b><br>
+                    \ {{ search.price }}
+                </a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>도서가 존재하지 않습니다.</p>
+    {% endif %}
+    </div>
+
+    <div>
+    {% if is_paginated %}
+    {% if request.GET.q%}
+    <p>
+    <!--이전 페이지 그룹으로 이동-->
+    {% if has_previous_page %}
+        <a href="/books/search/?q={{ request.GET.q }}&page={{ previous_page }}">이전</a>
+    {% endif %}
+    <!--페이지 번호 링크-->
+    {% for page in current_page_group_range %}
+    {% comment %} page_obj.number: 현재 보고있는 페이지 {% endcomment %}
+        {% if page == page_obj.number %}
+            {{ page }}
+        {% else %}
+            <a href="/books/search/?q={{ request.GET.q }}&page={{ page }}">
+                {{ page }} &nbsp;&nbsp;
+            </a>
+        {% endif %}
+    {% endfor %}
+    <!--다음 페이지 그룹으로 이동-->
+    {% if has_next_page %}
+        <a href="/books/search/?q={{ request.GET.q }}&page={{ next_page }}">다음</a>
+    {% endif %}
+    </p>
+
+    {% elif request.GET.category %}
+    <p>
+    <!--이전 페이지 그룹으로 이동-->
+    {% if has_previous_page %}
+        <a href="/books/search/?category={{ request.GET.category }}&page={{ previous_page }}">이전</a>
+    {% endif %}
+    <!--페이지 번호 링크-->
+    {% for page in current_page_group_range %}
+    {% comment %} page_obj.number: 현재 보고있는 페이지 {% endcomment %}
+        {% if page == page_obj.number %}
+            {{ page }}
+        {% else %}
+            <a href="/books/search/?category={{ request.GET.category }}&page={{ page }}">
+                {{ page }} &nbsp;&nbsp;
+            </a>
+        {% endif %}
+    {% endfor %}
+    <!--다음 페이지 그룹으로 이동-->
+    {% if has_next_page %}
+        <a href="/books/search/?category={{ request.GET.category }}&page={{ next_page }}">다음</a>
+    {% endif %}
+    </p>
+    {% endif %}
+    {% endif %}
+    </div>
+
+    {% endblock content %}
+</body>
+</html>

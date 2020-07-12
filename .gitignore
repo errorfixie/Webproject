@@ -143,4 +143,8 @@ cython_debug/
 # Mac os
 .DS_Store
 media/
+<<<<<<< HEAD
 node_modules/
+=======
+node_modules/
+>>>>>>> master
