@@ -24,7 +24,7 @@ class Article(models.Model):
     eventName = models.CharField(verbose_name="행사이름", max_length=255, null=True)  # 행사이름
     bookID = models.ForeignKey(
         book_models.Book,
-        verbose_name="회원ID",
+        verbose_name="도서ID",
         on_delete=models.CASCADE,
         null=True,
         blank=True,
