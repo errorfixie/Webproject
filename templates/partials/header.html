@@ -11,9 +11,9 @@
     <br>
     <br>
     <div><!--header 그리드-->
-        <input type="button" value="세모 책장" onClick="location.href=''">
-        <input type="button" value="이달의.." onClick="location.href=''">
-        <input type="button" value="동네 책방" onClick="location.href=''">
-        <input type="button" value="세모 작가" onClick="location.href=''">
+        <input type="button" value="세모 책장" onClick="location.href='{%url "books:list" %}'">
+        <input type="button" value="이달의.." onClick="location.href='{%url "articles:book" %}'">
+        <input type="button" value="동네 책방" onClick="location.href='{%url "bookstores:list" %}'">
+        <input type="button" value="세모 작가" onClick="location.href='{%url "writerblogs:writerblog" %}'">
     </div>
 </header>

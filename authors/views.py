@@ -10,6 +10,6 @@ def author(request, pk):
     all_authors = Author.objects.all()
     all_writerblogs = WriterBlog.objects.all()
     all_userpics = User.objects.all()
-    return render(request, "authors/authors.html", context={"authors": all_authors, "writerblogs":all_writerblogs, "userpics":all_userpics})
+    return render(request, "authors/authors.html", context={"authors": pk_authors, "writerblogs":all_writerblogs, "userpics":all_userpics})
 
 

@@ -27,6 +27,7 @@
     <table class='table'>
         <thead>
             <tr>
+                <th>사진</th>
                 <th>서점</th>
                 <th>주소</th>
             </tr>
@@ -34,6 +35,11 @@
         <tbody>
             {% for bookstore in bookstore_list %}
                 <tr>
+                    <td>
+                        <a href="{% url 'bookstores:detail' bookstore.pk %}">
+                        <img src = "{{bookstore.bookstorePic.url}}" width ='150'> 
+                        </a>
+                    </td>
                     <td>
                         <a href="{% url 'bookstores:detail' bookstore.pk %}">
                         {{bookstore.bookstoreName}}
