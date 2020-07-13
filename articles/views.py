@@ -75,10 +75,12 @@ def result(request):
 # 기능 : 기사카테고리 드롭박스
 class ThisMonthAuthorListView(ListView):
     model = Article
+    queryset = Article.objects.filter(articleCategory="author").order_by('-articleDate')
     template_name = 'articles/author.html'
     context_object_name = 'author_list'
     paginate_by = 1
-
+    
+        
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs) 
         
