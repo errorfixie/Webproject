@@ -34,7 +34,7 @@
     {% for book in page_obj %}
         사진: <img src="{{book.bookArticlePic.url}}" width='300',height='350'> <br>
         기사이름 : {{book.articleTitle}}<br>
-        기사내용 : {{book.articleExp|truncatechars:30}}<br>
+        기사내용 : {{book.articleExp}}<br>
         기사등록시간 : {{book.articleDate}}<br> 
 
     {% endfor %}

@@ -49,8 +49,10 @@
         <h3>새로 들어온 책</h3>
         <br>
         {% for book in books %}
-            <h4>{{book.bookTitle}}</h4>
+            <a href = "{% url 'books:detail' book.pk%}"> 
+            <h4>{{book.bookTitle}}</h4> 
             {{book.bookCategoryID}}
+            </a>
         <br>
         {% endfor %}
     </div>

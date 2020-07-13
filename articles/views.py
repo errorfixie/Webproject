@@ -37,7 +37,7 @@ def ThisMonthBookView(request):
         book_info = Article.objects.filter(articleCategory="book",bookID__bookCategoryID__pk=page_book).order_by('-articleDate')
     
     #페이지네이션작업
-    paginator = Paginator(book_info, 3) 
+    paginator = Paginator(book_info, 2) 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     

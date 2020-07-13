@@ -19,7 +19,7 @@
         <br>사진 : <a href = ""><img src = '{{ author.authorArticlePic.url }}' width='300',height='350'> </a>
         {% endif %}
         <br>기사제목 : {{author.articleTitle}}
-        <br>기사내용 : {{author.articleExp|truncatechars:30}}
+        <br>기사내용 : {{author.articleExp}}
         <br>기사등록시간 : {{author.articleDate}}
     
     {% endfor %}
