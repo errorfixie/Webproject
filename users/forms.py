@@ -17,7 +17,7 @@ book_choices = [
 class CreateUserForm(UserCreationForm):
     
     password1 =  forms.CharField(label = '비밀번호', strip=False, widget=forms.PasswordInput(attrs={'class':'form-control'}))
-    password2 =  forms.CharField(label = '비밀번호', strip=False, widget=forms.PasswordInput(attrs={'class':'form-control'}))
+    password2 =  forms.CharField(label = '비밀번호확인', strip=False, widget=forms.PasswordInput(attrs={'class':'form-control'}))
     
     likebooks = forms.MultipleChoiceField(
                                         label='관심장르', widget = forms.CheckboxSelectMultiple(),

@@ -42,6 +42,11 @@
         </div>
 
         <h4> 오늘의 기획전 제목(나중에 뺄 수도)</h4>
+        {% for article in special_article %}
+            <a href = "{% url 'articles:book' %}"> 
+            <img src = "{{article.bookArticlePic.url}}">
+            </a>
+        {% endfor %}
     </div>
     <!--여기까지 페이지 슬라이드-->
     <br>
@@ -50,6 +55,9 @@
         <br>
         {% for book in books %}
             <a href = "{% url 'books:detail' book.pk%}"> 
+            {% if book.bookPic %}
+                <img src="{{ book.bookPic.url }}" width=120> <br>
+            {% endif %}
             <h4>{{book.bookTitle}}</h4> 
             {{book.bookCategoryID}}
             </a>
@@ -62,9 +70,12 @@
     <div>
         <h3>작가의 책장</h3>
         <br>
-        {% for book in books %}
+        {% for book in writers_books %}
             <!-- {{book.bookPic}} 사진 안넣었음 -->
             <a href = "{% url 'books:detail' book.pk%}"> 
+            {% if book.bookPic %}
+                <img src="{{ book.bookPic.url }}" width=120> <br>
+            {% endif %}
             <h4>{{book.bookTitle}}</h4>
             {{book.bookCategoryID}}
             </a>
