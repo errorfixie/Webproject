@@ -12,7 +12,9 @@ def ThisMonthBookView(request):
     # 연,월 카테고리 변수 선언
     book_info_date_year = []
     book_info_date_month = []
-
+    page_year = None
+    page_month = None
+    page_book = None
     book_info = Article.objects.filter(articleCategory="book").order_by('-pk') #내림차순인 이유는 최신을 가장 먼저보여줘야하기 때문
 
     for i in book_info:
@@ -29,6 +31,7 @@ def ThisMonthBookView(request):
     if request.GET.get('cate_year'):
         page_year = request.GET.get('cate_year')
         book_info = Article.objects.filter(articleCategory="book",articleDate__year=page_year).order_by('-pk')
+
     elif request.GET.get('cate_month'):
         page_month = request.GET.get('cate_month')
         book_info = Article.objects.filter(articleCategory="book",articleDate__month=page_month).order_by('-pk')
@@ -66,9 +69,19 @@ def ThisMonthBookView(request):
 
     # 페이지가 달라져도 카테고리를 유지하기 위한 쿼리셋
     book_cate = Article.objects.filter(articleCategory="book").order_by('-pk')
-    context['book_cate'] = book_cate
+    book_info_cate = []
+    for i in book_cate:
+        book_cate = i.bookID.bookCategoryID
+        book_info_cate.append(book_cate)
+
+    book_info_cate = set(book_info_cate)
+    
+    context['book_cate'] = book_info_cate
     context['book_info_date_year'] = book_info_date_year
     context['book_info_date_month'] = book_info_date_month
+    context['page_year'] = page_year
+    context['page_month'] = page_month
+    context['page_book'] = page_book
 
     return render(request,"articles/book.html",context)
 # 이달의 행사

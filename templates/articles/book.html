@@ -12,7 +12,7 @@
     <h4>카테고리</h4>
     책카테고리별 :   
         {% for book in book_cate %}
-        <a href = "?cate_book={{book.bookID.bookCategoryID.pk}}">{{book.bookID.bookCategoryID}}</a>
+        <a href = "?cate_book={{book.pk}}">{{book}}</a>
         {% endfor %}<br>
         
     연도별 : 
@@ -46,7 +46,85 @@
     <h3> 페이지네이션 </h3>
 
 {% comment %} 페이징 처리 {% endcomment %}
+<div>
+    {% comment %} 책카테고리별 {% endcomment %}
+    {% if page_book %}
+        
+        {% if is_paginated %}
+        <p>
+        {% if has_previous_page %}
+            <a href='/articles/book/?cate_book={{page_book}}&page={{previous_page}}'>이전</a>
+        {% endif %}
+
+        {% for page in current_page_group_range %}
+            {% if page == page_obj.number %}
+                {{page}}
+            {% else %}
+                <a href='/articles/book/?cate_book={{page_book}}&page={{page}}'>
+                    {{page}} &nbsp;&nbsp;&nbsp;
+                </a>
+            {% endif %}
+        {% endfor %}
+
+        {% if has_next_page %}
+            <a href='/articles/book/?cate_book={{page_book}}&page={{next_page}}'>다음</a>
+        {% endif %}
+
+        </p>
+        {% endif %}
+
+        {% comment %} 연카테고리별 {% endcomment %}
+    {% elif page_year %}
+        {% if is_paginated %}
+        <p>
+        {% if has_previous_page %}
+            <a href='/articles/book/?cate_year={{page_year}}&page={{previous_page}}'>이전</a>
+        {% endif %}
+
+        {% for page in current_page_group_range %}
+            {% if page == page_obj.number %}
+                {{page}}
+            {% else %}
+                <a href='/articles/book/?cate_year={{page_year}}&page={{page}}'>
+                    {{page}} &nbsp;&nbsp;&nbsp;
+                </a>
+            {% endif %}
+        {% endfor %}
+
+        {% if has_next_page %}
+            <a href='/articles/book/?cate_year={{page_year}}&page={{next_page}}'>다음</a>
+        {% endif %}
+
+        </p>
+        {% endif %}
+
+        {% comment %} 월카테고리별 {% endcomment %}
     <div>
+    {% elif page_month %}
+        {% if is_paginated %}
+        <p>
+        {% if has_previous_page %}
+            <a href='/articles/book/?cate_month={{page_month}}&page={{previous_page}}'>이전</a>
+        {% endif %}
+
+        {% for page in current_page_group_range %}
+            {% if page == page_obj.number %}
+                {{page}}
+            {% else %}
+                <a href='/articles/book/?cate_month={{page_month}}&page={{page}}'>
+                    {{page}} &nbsp;&nbsp;&nbsp;
+                </a>
+            {% endif %}
+        {% endfor %}
+
+        {% if has_next_page %}
+            <a href='/articles/book/?cate_month={{page_month}}&page={{next_page}}'>다음</a>
+        {% endif %}
+
+        </p>
+        {% endif %}
+         {% comment %} 카테고리아닐때(평상시) {% endcomment %}
+        {% else %}
         {% if is_paginated %}
         <p>
         {% if has_previous_page %}
@@ -69,6 +147,6 @@
 
         </p>
         {% endif %}
-
-    </div>
+    {% endif %}
+</div>
 {% endblock content %}
