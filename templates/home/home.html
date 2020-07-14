@@ -64,8 +64,10 @@
         <br>
         {% for book in books %}
             <!-- {{book.bookPic}} 사진 안넣었음 -->
+            <a href = "{% url 'books:detail' book.pk%}"> 
             <h4>{{book.bookTitle}}</h4>
             {{book.bookCategoryID}}
+            </a>
         <br>
         {% endfor %}
     </div>

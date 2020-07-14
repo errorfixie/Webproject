@@ -9,7 +9,7 @@ class WriterBlogListView(ListView):
     model = models.WriterBlog
     paginate_by = 2
     template_name = "writersblog/writersblog.html"
-
+    queryset = models.WriterBlog.objects.order_by("-pk")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
