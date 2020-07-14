@@ -1,8 +1,0 @@
-{
-    "python.pythonPath": "/Users/seohilde/.local/share/virtualenvs/Webproject-VqGMykN2/bin/python",
-    "python.linting.pylintEnabled": true,
-    "python.linting.flake8Enabled": false,
-    "python.linting.enabled": true,
-    "python.formatting.provider": "black",
-    "liveServer.settings.port": 5501,
-}
