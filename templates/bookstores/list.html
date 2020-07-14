@@ -21,6 +21,7 @@
     </div>
 
     {% comment %} 제보하기 {% endcomment %}
+    <div>
     <input type="button" value="제보하기" onclick="location.href='create'">
 
 
@@ -28,29 +29,36 @@
         <thead>
             <tr>
                 <th>사진</th>
-                <th>서점</th>
-                <th>주소</th>
+                <th>정보</th>
             </tr>
         </thead>
         <tbody>
             {% for bookstore in bookstore_list %}
+            
                 <tr>
-                    <td>
+                    <th rowspan=2>
                         <a href="{% url 'bookstores:detail' bookstore.pk %}">
                         <img src = "{{bookstore.bookstorePic.url}}" width ='150'> 
                         </a>
-                    </td>
+                    </th>
                     <td>
                         <a href="{% url 'bookstores:detail' bookstore.pk %}">
                         {{bookstore.bookstoreName}}
                         </a>
                     </td>
-                    <td>{{bookstore.bookstoreAddress}}</td>
+                <tr>
+                    <td>
+                        <a href="{% url 'bookstores:detail' bookstore.pk %}">
+                        {{bookstore.bookstoreAddress}}
+                        </a>
+                    </td>
                 </tr>
+            
             {% endfor %}
         </tbody>
 
     </table>
+    </div>
 
     {% comment %} 페이징 처리 {% endcomment %}
     <div>

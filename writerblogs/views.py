@@ -7,7 +7,7 @@ from .forms import writersblogCreateForm
 
 class WriterBlogListView(ListView):
     model = models.WriterBlog
-    paginate_by = 2
+    paginate_by = 4
     template_name = "writersblog/writersblog.html"
     queryset = models.WriterBlog.objects.order_by("-pk")
 

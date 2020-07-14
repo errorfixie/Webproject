@@ -1,9 +1,15 @@
 from django import forms
-from . import models
+from .models import WriterBlog
 
 class writersblogCreateForm(forms.ModelForm):
 
     class Meta:
-        model = models.WriterBlog
-        exclude = ['userID']
-    
+        model = WriterBlog
+        fields = ['postTitle', 'postExp', 'postPic']
+        widgets ={
+                "postTitle":forms.TextInput(attrs={"class":"form-control"}),
+                "postExp":forms.Textarea(attrs={"class":"form-control"}),
+        }
+
+
+ 
