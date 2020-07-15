@@ -1,92 +1,85 @@
 {% extends 'base.html' %}
 
-{% block title %}동네책방{% endblock title %}
+{% block title %}<title>동네책방</title>{% endblock title %}
 
 {% block content %}
-
-    <h2>동네 책방</h2>
-
+<div>
     {% comment %} 검색기능 {% endcomment %}
-    <div>
-        <form action="/bookstores/search/" method='GET'>
+    <div class="text-center mt-10 mb-10 font-medium text-3xl self-center">
+        <form class="content-center" action="/bookstores/search/" method='GET'>
             {% csrf_token %}
-            <input type='search' name='q' value='{{ q }}'>
-            <input type='submit' value='검색'>
+            <div class="mr-24 mb-5 text-gray-600 text-opacity-50"> 서점명을 입력하세요. </div>
+            <input type='search' name='q' value='{{ q }}' class=" container bg-gray-100 appearance-none border-2 border-gray-200 shadow-lg focus:outline-none focus:bg-white focus:border-green-500 rounded px-2 mr-4 w-1/4 ">
+            <input type='Submit' value="" name="Submit" class="container w-8 h-8 cursor-pointer bg-center bg-cover transparent hover:bg-green-500 focus:border-green-500" style="background-image:url(https://imageog.flaticon.com/icons/png/512/71/71403.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=FFFFFFFF)">
         </form>
     </div>
 
     {% comment %} 책방 사진 / 이미지 크기 조정 {% endcomment %}
-    <div>
-        <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxOTA2MTZfODEg%2FMDAxNTYwNjkzMzAyMjQ5.LNZod6LIfNBkWv4Q0AQlUJLPoj4RQf2JxpsEP4hP2aUg.mc3Gyi8KLzgxe4gHftptBpsSMvZV2N9rf-Qe6wwf8uwg.JPEG.2519yk%2F20190616_135909.jpg&type=b400" style="width:300px; height:300px;">
-    </div>
+    <div class="container content-center justify-center items-center px-50vh"><!--이미지 부터 전체 상자-->
+        <div class="container w-75vh h-75vh mb-4 bg-cover bg-center" style="background-image:url(https://images.unsplash.com/photo-1528700850553-6a45e6f143db?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60)">
+        </div>
+        <div><h3 class="font-bold text-3xl">이달의 책방</h3><br>운영자가 다녀온 독립서점 <br> 독립서점 주인장이 이러이러함 여기서는 커피도 마실수 있음 어쩌고</div>
+        <div><!--시작!-->
+            <div><!--Table div-->
+                <table class='table mt-12'>
+                    <thead>
+                    <tr class="text-center h-8">
+                        <th class="bg-green-300 text-center w-25vh">사진</th>
+                        <th class="bg-green-300 text-center w-50vh">정보</th>
+                    </tr>
+                    </thead>
+                    <tbody class="bg-gray-100 text-center shadow-lg">
+                        {% for bookstore in bookstore_list %}
+                            <tr class="h-10">
+                                <th rowspan=2>
+                                    <a href="{% url 'bookstores:detail' bookstore.pk %}">
+                                    <img src = "{{bookstore.bookstorePic.url}}"></a>
+                                </th>
+                                <td>
+                                    <a href="{% url 'bookstores:detail' bookstore.pk %}">
+                                    {{bookstore.bookstoreName}}
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>{{bookstore.bookstoreAddress}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div><!--Table div 끝! -->
+                
+            <div> {% comment %} 페이징 처리 {% endcomment %}
+                {% if is_paginated %}
+                    <p>
+                    {% if has_previous_page %}
+                        <a href='/bookstores/?page={{previous_page}}'>이전</a>
+                    {% endif %}
 
-    {% comment %} 제보하기 {% endcomment %}
-    <div>
-    <input type="button" value="제보하기" onclick="location.href='create'">
+                    {% for page in current_page_group_range %}
+                        {% if page == page_obj.number %}
+                            {{page}}
+                        {% else %}
+                            <a href='/bookstores/?page={{page}}'>
+                                {{page}} &nbsp;&nbsp;&nbsp;
+                            </a>
+                        {% endif %}
+                    {% endfor %}
 
-
-    <table class='table'>
-        <thead>
-            <tr>
-                <th>사진</th>
-                <th>정보</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for bookstore in bookstore_list %}
-            
-                <tr>
-                    <th rowspan=2>
-                        <a href="{% url 'bookstores:detail' bookstore.pk %}">
-                        <img src = "{{bookstore.bookstorePic.url}}" width ='150'> 
-                        </a>
-                    </th>
-                    <td>
-                        <a href="{% url 'bookstores:detail' bookstore.pk %}">
-                        {{bookstore.bookstoreName}}
-                        </a>
-                    </td>
-                </tr>
-                <tr> 
-                    <td>
-                        <a href="{% url 'bookstores:detail' bookstore.pk %}">
-                        {{bookstore.bookstoreAddress}}
-                        </a>
-                    </td>
-                </tr>
-            
-            {% endfor %}
-        </tbody>
-
-    </table>
-    </div>
-
-    {% comment %} 페이징 처리 {% endcomment %}
-    <div>
-        {% if is_paginated %}
-        <p>
-        {% if has_previous_page %}
-            <a href='/bookstores/?page={{previous_page}}'>이전</a>
-        {% endif %}
-
-        {% for page in current_page_group_range %}
-            {% if page == page_obj.number %}
-                {{page}}
-            {% else %}
-                <a href='/bookstores/?page={{page}}'>
-                    {{page}} &nbsp;&nbsp;&nbsp;
-                </a>
-            {% endif %}
-        {% endfor %}
-
-        {% if has_next_page %}
-            <a href='/bookstores/?page={{next_page}}'>다음</a>
-        {% endif %}
-
-        </p>
-        {% endif %}
-
-    </div>
-
+                    {% if has_next_page %}
+                        <a href='/bookstores/?page={{next_page}}'>다음</a>
+                    {% endif %}
+                    </p>
+                {% endif %}
+            </div><!--페이징 처리 끝-->
+        </div><!--이미지 div-->
+        <div type="button" value="서점 제보하기" onclick="location.href='create'" class="mt-10 float-right text-sm ml-8 bg-transparent hover:bg-green-400 text-green-700 font-semibold hover:text-white py-2 px-3 border border-green-400 hover:border-transparent rounded">
+            서점 제보하기
+        </div>
+    </div><!--전체 블럭 끝-->
+</div>
+<br>
+<br>
+<br>
 {% endblock content %}
 

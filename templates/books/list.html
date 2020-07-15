@@ -1,42 +1,41 @@
+{% extends 'base.html' %}
 
-    {% extends 'base.html' %}
+{% block title %}<title>전체도서</title>{% endblock title %}
 
-    {% block title %}세모책장
-    {% endblock title %}
-
-    {% block content %}
-
-    <div>
-    <form action="/books/search/" method='GET'>
-        <input type='search' name='q' value='{{ q }}'>
-        <input type='submit' value='검색'>
-    </form>
+{% block content %}
+<div>
+    <div class="text-center mt-10 mb-10 font-medium text-3xl self-center">
+        <form class="content-center" action="/books/search/" method='GET'>
+            <input type='search' name='q' value='{{ q }}' class="container bg-gray-100 appearance-none border-2 border-gray-200 shadow-lg focus:outline-none focus:bg-white focus:border-green-500 rounded px-2 mr-4 w-1/4">
+            <input type='Submit' value="" name="Submit" class="container w-8 h-8 cursor-pointer bg-center bg-cover transparent hover:bg-green-500 focus:border-green-500" style="background-image:url(https://imageog.flaticon.com/icons/png/512/71/71403.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=FFFFFFFF)">
+        </form>
     </div>
 
-    <div>
-    {% include 'books/category_base.html' %}
-    </div>
-
-    <div>
-    <h3>전체도서</h3>
-    </div>
-
-    <div>
-    {% if total_book_list %}
-        <div><ul>
-            {% for book_list in total_book_list %}
-                <li><a href="/books/{{ book_list.id }}">
-                    {% if book_list.bookPic %}
-                        <img src="{{ book_list.bookPic.url }}" width=120> <br>
-                    {% endif %}
-                    <b>{{ book_list.bookTitle }}</b><br>
-                    \ {{ book_list.price }}
-                </a></li>
-            {% endfor %}
-        </ul></div>
-    {% else %}
-        <p>도서가 존재하지 않습니다.</p>
-    {% endif %}
+    <div class="w-full mt-20"><!--카테고리 설명-->
+        <div class="flex-initial absolute ml-10 ">
+            {% include 'books/category_base.html' %}
+        </div>
+        <!--여기서부터 북 div -->
+        
+        <div class="px-5 ml-25vh w-full flex flex-wrap">
+            {% if total_book_list %}
+                {% for book_list in total_book_list %}
+                    <div class="container w-1/4 mb-5 mx-10 text-sm font-normal">
+                        {% if book_list.bookPic %}
+                            <div class="w-64 h-50vh bg-cover bg-center cursor-pointer" onclick="location.href='/books/{{book_list.id}}';" style="background-image: url({{book_list.bookPic.url}});"></div>
+                        {% endif %}
+                        <div class="container mb-5 text-sm font-normal ">
+                            <div class="font-thin justify-start">
+                                <div>{{book_list.bookTitle|truncatechars:25}}</div>
+                                <div>{{book_list.price}}원</div>
+                            </div>
+                        </div>                                                
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>도서가 존재하지 않습니다.</p>
+            {% endif %}
+        </div>
     </div>
 
     <div>
@@ -64,7 +63,5 @@
     </p>
     {% endif %}
     </div>
-
-    {% endblock content %}
-</body>
-</html>
+</div>
+{% endblock content %}

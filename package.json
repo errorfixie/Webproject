@@ -6,6 +6,9 @@
     "type": "git",
     "url": "git+https://github.com/Blackraven93/Webproject.git"
   },
+  "scripts": {
+    "css": "gulp"
+  },
   "homepage": "https://github.com/Blackraven93/Webproject#readme",
   "devDependencies": {
     "autoprefixer": "^9.8.5",
