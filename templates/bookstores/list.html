@@ -15,17 +15,17 @@
     </div>
 
     {% comment %} 책방 사진 / 이미지 크기 조정 {% endcomment %}
-    <div class="container content-center justify-center items-center px-50vh"><!--이미지 부터 전체 상자-->
-        <div class="container w-75vh h-75vh mb-4 bg-cover bg-center" style="background-image:url(https://images.unsplash.com/photo-1528700850553-6a45e6f143db?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60)">
+    <div class="container content-center justify-center items-center pl-25vh"><!--이미지 부터 전체 상자-->
+        <div class="container w-full h-75vh mb-4 bg-cover bg-center ml-10 rounded-xl" style="background-image:url(https://images.unsplash.com/photo-1577985051167-0d49eec21977?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1325&q=80)">
         </div>
-        <div><h3 class="font-bold text-3xl">이달의 책방</h3><br>운영자가 다녀온 독립서점 <br> 독립서점 주인장이 이러이러함 여기서는 커피도 마실수 있음 어쩌고</div>
+        <div><h3 class="font-bold text-3xl ml-25vh">이달의 책방</h3><br><div class="ml-25vh">운영자가 다녀온 독립서점</div><br><div class="ml-25vh"> 독립서점 주인장이 이러이러함 여기서는 커피도 마실수 있음 어쩌고</div></div>
         <div><!--시작!-->
             <div><!--Table div-->
-                <table class='table mt-12'>
+                <table class='table mt-12 w-9/12 ml-25vh'>
                     <thead>
                     <tr class="text-center h-8">
-                        <th class="bg-green-300 text-center w-25vh">사진</th>
-                        <th class="bg-green-300 text-center w-50vh">정보</th>
+                        <th class="bg-green-300 text-center w-50vh">사진</th>
+                        <th class="bg-green-300 text-center w-75vh">정보</th>
                     </tr>
                     </thead>
                     <tbody class="bg-gray-100 text-center shadow-lg">
@@ -35,7 +35,7 @@
                                     <a href="{% url 'bookstores:detail' bookstore.pk %}">
                                     <img src = "{{bookstore.bookstorePic.url}}"></a>
                                 </th>
-                                <td>
+                                <td class="pt-3 pl-3">
                                     <a href="{% url 'bookstores:detail' bookstore.pk %}">
                                     {{bookstore.bookstoreName}}
                                     </a>

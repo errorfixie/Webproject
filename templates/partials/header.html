@@ -1,5 +1,5 @@
 <div class="container flex items-center justify-center py-5 text-5xl">
-    <div class="left-0 px-20 object-left h-full relative text-sm py-5"><div class="left-0 text-left absolute">세상의 모든 독립출판을 위한</div></div>
+    <div class="px-24 object-left h-full relative text-sm py-5 ml-10"><div class="left-0 text-left absolute">세상의 모든 독립출판을 위한</div></div>
     <div class="px-5"><a href="{% url 'home' %}"><h1>세모 책방</h1></a></div>
 </div>
 
@@ -10,9 +10,9 @@
 
 
 <!--header 그리드-->
-<div class="container flex ">
+<div class="container flex max-w-full w-screen ">
     <input class="w-1/4 bg-green-200 h-12 text-sm bg-transparent hover:bg-green-400 text-green-700 font-semibold hover:text-white border-green-400 hover:border-transparent" type="button" value="세모 책장" onClick="location.href='{%url "books:list" %}'">
-    <input class="w-1/4 bg-green-200 h-12 text-sm bg-transparent hover:bg-green-400 text-green-700 font-semibold hover:text-white border-green-400 hover:border-transparent" type="button" value="이달의.." onClick="location.href='{%url "articles:book" %}">
+    <input class="w-1/4 bg-green-200 h-12 text-sm bg-transparent hover:bg-green-400 text-green-700 font-semibold hover:text-white border-green-400 hover:border-transparent" type="button" value="이달의.." onClick="location.href='{%url "articles:book" %}'">
     <input class="w-1/4 bg-green-200 h-12 text-sm bg-transparent hover:bg-green-400 text-green-700 font-semibold hover:text-white border-green-400 hover:border-transparent" type="button" value="동네 책방" onClick="location.href='{%url "bookstores:list" %}'">
     <input class="w-1/4 bg-green-200 h-12 text-sm bg-transparent hover:bg-green-400 text-green-700 font-semibold hover:text-white border-green-400 hover:border-transparent" type="button" value="세모 작가" onClick="location.href='{%url "writerblogs:writerblog" %}'">
 </div>

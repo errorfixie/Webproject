@@ -8,14 +8,17 @@ from django.contrib.auth.forms import (
 from django import forms
 
 book_choices = [
-    ("humanities", "인문"),
-    ("sociology", "사회"),
-    ("poetry", "시집"),
-    ("prose", "산문"),
-    ("essay", "수필"),
-    ("novel", "소설"),
-    ("poem", "시"),
-    ("illustration", "삽화"),
+    ("Photo", "사진"),
+    ("construct", "건축, 지역"),
+    ("record", "음반"),
+    ("design", "디자인"),
+    ("movie", "영화"),
+    ("literature", "문학, 비평"),
+    ("Experiment", "주제, 실험"),
+    ("magazine", "잡지"),
+    ("illustration","일러스트레이션, 회화, 만화"),
+    ("Illustrated book","도감"),
+    
 ]
 
 
