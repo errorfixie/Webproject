@@ -17,6 +17,8 @@ class BookstoreListView(ListView):
     template_name = 'bookstores/list.html'
     context_object_name = 'bookstore_list'
     paginate_by = 5
+    queryset = Bookstore.objects.all().order_by('-pk')
+    
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs) 
@@ -84,6 +86,7 @@ class BookstoreSearchView(ListView):
     model = Bookstore
     template_name = 'bookstores/search.html'
     context_object_name = 'search'
+    queryset = Bookstore.objects.all().order_by('-pk')
 
     def get_queryset(self):
         result = super(BookstoreSearchView, self).get_queryset()

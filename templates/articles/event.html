@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 
+{% block title %}이달의행사
+{% endblock title %}
+
 {% block content %}
 <div>
     <h1>이달의행사페이지(제목)</h1>
@@ -7,7 +10,7 @@
 
 <div>
     <h4>검색박스: </h4><br>
-        <form action="{%url 'articles:result'%}" method='GET'>
+        <form action="{%url 'articles:result' %}" method='GET'>
         {% csrf_token %}
 	    <input type="search" placeholder="지역/행사 제목 검색" name="query">
 	    <button type = "submit" value="검색">검색</button>
@@ -27,27 +30,35 @@
         사진:<img src = '{{event.eventArticlePic.url}}'  width='200',height='150'> - 기사제목: {{event.articleTitle}}<br>
             행사이름 : {{event.eventName}}<br>
             기사내용: {{event.articleExp}}<br>
-            기사등록시간 : {{event.articleDate}}<br> 
+    
             
     {% endfor %}
 
     <h3>페이지네이션</h3>
-<div class = "pagination">
-    <span class="step-links">
-        {%if page_obj.has_previous%}
-            <a href ="?page=1">&laquo; first</a>
-            <a href ="?page={{page_obj.previous_page_number}}">previous</a>
-        {%endif%}
-
-        <span class="current">
-            Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}
-        </span>
-
-        {% if page_obj.has_next %}
-            <a href = "?page={{page_obj.next_page_number}}">next</a>
-            <a href = "?page={{page_obj.paginator.num_pages}}">last &raquo;</a>
+{% comment %} 페이징 처리 {% endcomment %}
+    <div>
+        {% if is_paginated %}
+        <p>
+        {% if has_previous_page %}
+            <a href='/articles/event/?page={{previous_page}}'>이전</a>
         {% endif %}
-    </span>
-</div>
 
+        {% for page in current_page_group_range %}
+            {% if page == page_obj.number %}
+                {{page}}
+            {% else %}
+                <a href='/articles/event/?page={{page}}'>
+                    {{page}} &nbsp;&nbsp;&nbsp;
+                </a>
+            {% endif %}
+        {% endfor %}
+
+        {% if has_next_page %}
+            <a href='/articles/event/?page={{next_page}}'>다음</a>
+        {% endif %}
+
+        </p>
+        {% endif %}
+
+    </div>
 {% endblock content %}

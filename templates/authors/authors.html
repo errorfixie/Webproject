@@ -6,8 +6,11 @@
 
 {% block content %}
 
+    {{authors.authorName}}<br>
+    {{authors.authorExp}}<br>
+    {{authors.authorEmail}}
 
-    <div>
+    {% comment %} <div>
     {% for userpic in userpics %}
         {% if userpic.userPic %}
                 <img src="{{ userpic.userPic.url }}"> 
@@ -34,7 +37,7 @@
         {% endfor %}
     </div>
 
-    
+     {% endcomment %}
 
 
 {% endblock content %}

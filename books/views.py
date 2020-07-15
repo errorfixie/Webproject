@@ -11,6 +11,7 @@ class BookList(generic.ListView):
     model = Book
     template_name = "books/list.html"
     context_object_name = "total_book_list"
+    queryset = Book.objects.all().order_by("-pk")
 
     # 한 페이지에 보여줄 데이터 수
     paginate_by = 12
@@ -53,6 +54,7 @@ class BookSearchView(generic.ListView):
     model = Book
     template_name = "books/search.html"
     context_object_name = "book_search"
+    queryset = Book.objects.all().order_by("-pk")
 
     def get_queryset(self):
         result = super(BookSearchView, self).get_queryset()

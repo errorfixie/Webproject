@@ -1,14 +1,73 @@
 {% extends 'base.html' %}
 
 {% block title %}
-<title>세모작가 게시판</title>
+세모작가 게시판
 {% endblock title %}
 
 {% block content %}
 
-{% for writerblog in object_list %}
-    <img src="{{ writerblog.postPic.url }}"> <h3>{{writerblog.postTitle}}</h3>
-    <br>{{writerblog.postExp|truncatechars:30}} / {{writerblog.postDate}}
-{% endfor %}
+<div>
+    <table class='table'>
+        <tbody>
+            {% for writerblog in object_list %}
+                <tr>
+                    <th rowspan=3>
+                        <a href="{% url 'writerblogs:detail' writerblog.pk%}">
+                        <img src = "{{writerblog.postPic.url}}" width ='150'> 
+                        </a>
+                    </th>
+                    <td>
+                        <a href="{% url 'writerblogs:detail' writerblog.pk%}">
+                            {{writerblog.postTitle}}
+                        </a>
+                    </td>
+                <tr>
+                    <td>
+                        <a href="{% url 'writerblogs:detail' writerblog.pk%}">
+                        {{writerblog.postExp|truncatechars:30}} 
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="{% url 'writerblogs:detail' writerblog.pk%}">
+                        {{writerblog.userID}}/{{writerblog.postDate}}
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+<input type="button" value="등록하기" onclick="location.href='create'">
+</div>
+
+
+<div>
+        {% if is_paginated %}
+        <p>
+        {% if has_previous_page %}
+            <a href='/writerblog/?page={{previous_page}}'>이전</a>
+        {% endif %}
+
+        {% for page in current_page_group_range %}
+            {% if page == page_obj.number %}
+                {{page}}
+            {% else %}
+                <a href='/writerblog/?page={{page}}'>
+                    {{page}} &nbsp;&nbsp;&nbsp;
+                </a>
+            {% endif %}
+        {% endfor %}
+
+        {% if has_next_page %}
+            <a href='/writerblog/?page={{next_page}}'>다음</a>
+        {% endif %}
+
+        </p>
+        {% endif %}
+
+    </div>
 
 {% endblock content %}

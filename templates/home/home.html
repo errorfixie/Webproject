@@ -1,26 +1,33 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    <title>Home</title>
+    세모책방
 {% endblock title %}
 
 {% block content %}
 <!--여기서부터 페이지 슬라이드 그리드-->
 <div class="container.mx-auto">
-    <div class="container w-auto bg-gray-600 h-50vh mb-4 bg-cover" style="background-image:url(https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1753&q=80)">
-    </div>
-    <div class="container text-center mb-20 font-semibold text-3xl mt-12"><h2>이달의 공모전</h2></div>
+    {% for article in special_article %}
+        <div class="container w-auto bg-gray-600 h-50vh mb-4 bg-cover cursor-pointer" onclick="location.href="{% url 'articles:book' %}";" style="background-image:url({{article.bookArticlePic.url}})">
+        </div>
+        <div class="container text-center mb-20 font-semibold text-3xl mt-12">
+        <!--<h2>이달의 공모전</h2>-->
+        </div>    
+    {% endfor %}
+    
     <!--여기까지 페이지 슬라이드-->
     <h3 class="text-left ml-4 text-2xl mb-10 border-b-4 border-green-700 border-opacity-50 mr-4 border-double">새로 들어온 책</h3>
     <div class="flex ml-4 flex-wrap border-b-4 border-green-700 border-opacity-50 mr-4 border-double">
         {% for book in books %}
-            <div class="container w-1/4 mb-5 px-4 text-sm font-normal">
-                <div class="w-full h-50vh bg-cover bg-center" style="background-image: url({{book.bookPic.url}});"></div>
-                <div class="flex justify-between">
-                    {{book.bookCategoryID}}
-                    <h4>{{book.bookTitle}}</h4>
+            {% if book.bookPic %}
+                <div class="container w-1/4 mb-5 px-4 text-sm font-normal">
+                    <div class="w-full h-50vh bg-cover bg-center" onclick="location.href="{% url 'books:detail' book.pk %}";" style="background-image: url({{book.bookPic.url}});"></div>
+                    <div class="flex justify-between">
+                        {{book.bookCategoryID}}
+                        <h4>{{book.bookTitle}}</h4>
+                    </div>
                 </div>
-            </div>
+            {% endif %}
         {% endfor %}
     </div>
         <br>
@@ -29,14 +36,16 @@
     <div>
         <h3 class="text-left ml-4 text-2xl mb-10 border-b-4 border-green-700 border-opacity-50 mr-4 border-double">작가의 책장</h3>
         <div class="flex ml-4 flex-wrap border-b-4 border-green-700 border-opacity-50 mr-4 border-double">
-        {% for book in books %}
+        {% for book in writers_books %}
+            {% if book.bookPic %}
             <div class="container w-1/4 mb-5 px-4 text-sm font-normal ">
-                <div class="w-full h-50vh bg-cover bg-center" style="background-image: url({{book.bookPic.url}});"></div>
+                <div class="w-full h-50vh bg-cover bg-center"  onclick="location.href="{% url 'books:detail' book.pk %}";" style="background-image: url({{book.bookPic.url}});"></div>
                 <div class="flex justify-between">
                     {{book.bookCategoryID}}
                     <h4>{{book.bookTitle}}</h4>
                 </div>
             </div>
+            {% endif %}
         {% endfor %}
     </div>
 </div>

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}세모작가상세
+{% endblock title %}
+
+{% block content %}
+
+<h2>{{writersblog_detail.postTitle}}</h2>
+<img src="{{ writersblog_detail.postPic.url }}"> <h3>{{writersblog_detail.postTitle}}</h3>
+    <br>{{writersblog_detail.postExp}} / {{writersblog_detail.postDate}}<br>
+
+    {% if user.is_authenticated %}
+    <p>
+        <a href="{% url 'writerblogs:update' writersblog_detail.pk%}" class='btn btn-primary'>수정</a>
+        <a href="{% url 'writerblogs:delete' writersblog_detail.pk%}" class='btn btn-primary'
+        onclick="return confirm('정말 삭제하시겠습니까?')">
+        삭제
+        </a>
+    </p>
+    {% endif %} 
+
+{% endblock content %}

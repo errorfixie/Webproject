@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
-
+{% block title %}이달의작가
+{% endblock title %}
 {% block content %}
 <div>
     <h1>이달의작가페이지(제목)</h1>
@@ -14,20 +15,42 @@
 
 <div>
     <h4>내용</h4>
-    {% for author in author_info  %}
+    {% for author in author_list  %}
+        {% if author.authorArticlePic %}
         <br>사진 : <a href = ""><img src = '{{ author.authorArticlePic.url }}' width='300',height='350'> </a>
+        {% endif %}
         <br>기사제목 : {{author.articleTitle}}
         <br>기사내용 : {{author.articleExp}}
-        <br>기사등록시간 : {{author.articleDate}}
+    
+    
     {% endfor %}
 </div>
 
-<div>
-    <h3>작가명, 소개</h3>
-    {% for author in author_info  %}
-    저자명: {{author.authorID}}<br>
-    저자설명 : {{author.authorID.authorExp}}<br>
-    저자이메일 : {{author.authorID.authorEmail}}<br>
-    {% endfor %}
-</div>
+{% comment %} 페이징 처리 {% endcomment %}
+    <div>
+        {% if is_paginated %}
+        <p>
+        {% if has_previous_page %}
+            <a href='/articles/author/?page={{previous_page}}'>이전</a>
+        {% endif %}
+
+        {% for page in current_page_group_range %}
+            {% if page == page_obj.number %}
+                {{page}}
+            {% else %}
+                <a href='/articles/author/?page={{page}}'>
+                    {{page}} &nbsp;&nbsp;&nbsp;
+                </a>
+            {% endif %}
+        {% endfor %}
+
+        {% if has_next_page %}
+            <a href='/articles/author/?page={{next_page}}'>다음</a>
+        {% endif %}
+
+        </p>
+        {% endif %}
+
+    </div>
+
 {% endblock content %}

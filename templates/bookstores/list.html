@@ -24,18 +24,24 @@
                 <table class='table mt-12'>
                     <thead>
                     <tr class="text-center h-8">
-                        <th class="bg-green-300 text-center w-25vh">서점</th>
-                        <th class="bg-green-300 text-center w-50vh">주소</th>
+                        <th class="bg-green-300 text-center w-25vh">사진</th>
+                        <th class="bg-green-300 text-center w-50vh">정보</th>
                     </tr>
                     </thead>
                     <tbody class="bg-gray-100 text-center shadow-lg">
                         {% for bookstore in bookstore_list %}
                             <tr class="h-10">
+                                <th rowspan=2>
+                                    <a href="{% url 'bookstores:detail' bookstore.pk %}">
+                                    <img src = "{{bookstore.bookstorePic.url}}"></a>
+                                </th>
                                 <td>
                                     <a href="{% url 'bookstores:detail' bookstore.pk %}">
                                     {{bookstore.bookstoreName}}
                                     </a>
                                 </td>
+                            </tr>
+                            <tr>
                                 <td>{{bookstore.bookstoreAddress}}</td>
                             </tr>
                         {% endfor %}

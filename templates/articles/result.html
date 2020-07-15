@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 
+{% block title %}행사검색결과
+{% endblock title %}
+
 {% block content %}
 <div>
 <h1>행사검색결과!!(제목)</h1>
@@ -27,28 +30,37 @@
         사진:<img src = '{{post.eventArticlePic.url}}'  width='200',height='150'> - 기사제목: {{post.articleTitle}}<br>
             행사이름 : {{post.eventName}}<br>
             기사내용: {{post.articleExp}}<br>
-            기사등록시간 : {{post.articleDate}}<br> 
+       
 
     {%empty%}
         <h1>검색결과가 없습니다</h1>
     {%endfor%}
 
         <h3>페이지네이션</h3>
-<div class = "pagination">
-    <span class="step-links">
-        {%if page_obj.has_previous%}
-            <a href ="?page=1">&laquo; first</a>
-            <a href ="?page={{page_obj.previous_page_number}}">previous</a>
-        {%endif%}
-
-        <span class="current">
-            Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}
-        </span>
-
-        {% if page_obj.has_next %}
-            <a href = "?page={{page_obj.next_page_number}}">next</a>
-            <a href = "?page={{page_obj.paginator.num_pages}}">last &raquo;</a>
+{% comment %} 페이징 처리 {% endcomment %}
+    <div>
+        {% if is_paginated %}
+        <p>
+        {% if has_previous_page %}
+            <a href='/articles/result/?query={{query}}&page={{previous_page}}'>이전</a>
         {% endif %}
-    </span>
-</div>
+
+        {% for page in current_page_group_range %}
+            {% if page == page_obj.number %}
+                {{page}}
+            {% else %}
+                <a href='/articles/result/?query={{query}}&page={{page}}'>
+                    {{page}} &nbsp;&nbsp;&nbsp;
+                </a>
+            {% endif %}
+        {% endfor %}
+
+        {% if has_next_page %}
+            <a href='/articles/result/?query={{query}}&page={{next_page}}'>다음</a>
+        {% endif %}
+
+        </p>
+        {% endif %}
+
+    </div>
 {% endblock content %}
