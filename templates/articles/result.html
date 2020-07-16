@@ -10,7 +10,7 @@
 <div class="ml-10 w-3/12 pt-10">
     <form action="{%url 'articles:result' %}" method='GET'>
     {% csrf_token %}
-	<input type='search' name='query' placeholder="지역/행사 제목 검색" value='{{ q }}' class="container bg-gray-100 appearance-none border-2 border-gray-200 shadow-lg focus:outline-none focus:bg-white focus:border-green-500 rounded px-2 mr-4 w-7/12">
+	<input type='search' name='query' placeholder="지역/행사 제목 검색" value='{{ q }}' class="container bg-gray-100 appearance-none border-2 border-gray-200 shadow-lg focus:outline-none focus:bg-white focus:border-green-500 rounded px-2 mr-4 w-6/12">
     <input type='Submit' value="" name="Submit" class="container w-8 h-8 cursor-pointer bg-center bg-cover transparent hover:bg-green-500 focus:border-green-500" style="background-image:url(https://imageog.flaticon.com/icons/png/512/71/71403.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=FFFFFFFF)">
     </form>
 </div>
@@ -36,8 +36,8 @@
                     {% endif %}
                     <div class="container mb-5 text-sm font-normal">
                         <div class="font-normal justify-start">
-                            <div class="font-bold font text-4xl text-green-700 pb-10 pt-4">행사이름 : {{event.articleTitle}}</div>
-                            <div class="w-7/12">기사내용 : {{event.articleExp}}</div>
+                            <div class="font-bold font text-4xl text-green-700 pb-10 pt-4">{{event.articleTitle}}</div>
+                            <div class="w-7/12">{{event.articleExp}}</div>
                         </div>
                     </div>
                 </div>

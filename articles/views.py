@@ -124,33 +124,36 @@ def result(request):
     posts = None
     if query:
         posts = Article.objects.all().filter(articleTitle__contains=query,articleCategory="event").order_by('-pk')
-    paginator = Paginator(posts,2)
-    # page_obj = paginator.get_page(page_number)
-    context = {}
-    if paginator.num_pages > 1:
-        context['is_paginated'] = True
+    if not posts:
+        return render(request,"articles/result.html",{'query':query,'is_paginated':False})
     else:
-        context['is_paginated'] = False
-    context['query'] = query
-    context['page_obj'] = paginator.get_page(page_number)
-    page_number_range = 5
-    current_page = int(request.GET.get('page', 1))
-    start_index = int((current_page-1)/page_number_range)*page_number_range 
-    end_index = start_index + page_number_range 
-    current_page_group_range = paginator.page_range[start_index:end_index]
-    start_page = paginator.page(current_page_group_range[0]) 
-    end_page = paginator.page(current_page_group_range[-1])
-    has_previous_page = start_page.has_previous()
-    has_next_page = end_page.has_next()
-    context['current_page_group_range'] = current_page_group_range
-    if has_previous_page: 
-        context['has_previous_page'] = has_previous_page
-        context['previous_page'] = start_page.previous_page_number
-    
-    if has_next_page:
-        context['has_next_page'] = has_next_page
-        context['next_page'] = end_page.next_page_number
-    return render(request,"articles/result.html",context)
+        context = {}
+        paginator = Paginator(posts,2)
+        # page_obj = paginator.get_page(page_number)
+        if paginator.count > 1:
+            context['is_paginated'] = True
+        else:
+            context['is_paginated'] = False
+        context['query'] = query
+        context['page_obj'] = paginator.get_page(page_number)
+        page_number_range = 5
+        current_page = int(request.GET.get('page', 1))
+        start_index = int((current_page-1)/page_number_range)*page_number_range 
+        end_index = start_index + page_number_range 
+        current_page_group_range = paginator.page_range[start_index:end_index]
+        start_page = paginator.page(current_page_group_range[0]) 
+        end_page = paginator.page(current_page_group_range[-1])
+        has_previous_page = start_page.has_previous()
+        has_next_page = end_page.has_next()
+        context['current_page_group_range'] = current_page_group_range
+        if has_previous_page: 
+            context['has_previous_page'] = has_previous_page
+            context['previous_page'] = start_page.previous_page_number
+        
+        if has_next_page:
+            context['has_next_page'] = has_next_page
+            context['next_page'] = end_page.next_page_number
+        return render(request,"articles/result.html",context)
  
 # 이달의 작가 
 # 필요 요소: 행사 사진, 작가사진, 작가등등 작가Id, 기사제목, 기사내용, 기사카테고리 

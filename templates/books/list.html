@@ -16,25 +16,26 @@
             {% include 'books/category_base.html' %}
         </div>
         <!--여기서부터 북 div -->
-        
-        <div class="px-5 ml-25vh w-full flex flex-wrap">
-            {% if total_book_list %}
-                {% for book_list in total_book_list %}
-                    <div class="container w-1/4 mb-5 mx-10 text-sm font-normal">
-                        {% if book_list.bookPic %}
-                            <div class="w-64 h-50vh bg-cover bg-center cursor-pointer" onclick="location.href='/books/{{book_list.id}}';" style="background-image: url({{book_list.bookPic.url}});"></div>
-                        {% endif %}
-                        <div class="container mb-5 text-sm font-normal ">
-                            <div class="font-thin justify-start">
-                                <div>{{book_list.bookTitle|truncatechars:25}}</div>
-                                <div>{{book_list.price}}원</div>
-                            </div>
-                        </div>                                                
-                    </div>
-                {% endfor %}
-            {% else %}
-                <p class="text-3xl font-thin text-red-400 text ml-25vh">도서가 존재하지 않습니다.</p>
-            {% endif %}
+        <div class="w-full">
+            <div class="px-5 ml-25vh flex flex-wrap">
+                {% if total_book_list %}
+                    {% for book_list in total_book_list %}
+                        <div class="container w-1/4 mb-5 mx-10 text-sm font-normal">
+                            {% if book_list.bookPic %}
+                                <div class="w-64 h-50vh bg-cover bg-center cursor-pointer" onclick="location.href='/books/{{book_list.id}}';" style="background-image: url({{book_list.bookPic.url}});"></div>
+                            {% endif %}
+                            <div class="container mb-5 text-sm font-normal ">
+                                <div class="font-thin justify-start">
+                                    <div>{{book_list.bookTitle|truncatechars:25}}</div>
+                                    <div>{{book_list.price}}원</div>
+                                </div>
+                            </div>                                                
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="text-3xl font-thin text-red-400 text ml-25vh">도서가 존재하지 않습니다.</p>
+                {% endif %}
+            </div>
         </div>
     </div>
 

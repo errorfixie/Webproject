@@ -12,7 +12,7 @@
         <a href = "{%url 'articles:event' %}">이달의행사</a><br>
     </div>
 </div>
-    <div class="container absolute w-20 pt-40 ml-10 my-32 text-normal">
+    <div class="container absolute w-40 ml-10 my-25vh text-normal">
         <div class="mb-5">Bookcategory    
             {% for book in book_cate %}
             <div><a href = "?cate_book={{book.pk}}">{{book}}</a></div>
@@ -30,8 +30,8 @@
         </div>
     </div>
 </div>
-    
-        <div class="px-5 pl-32 w-full ml-20">
+    <div class="w-full">
+        <div class="px-5 pl-40 ml-25vh">
             {% for book in page_obj %}
             <div class="container w-full text-sm font-normal">
                     {% if book.bookArticlePic %}
@@ -39,13 +39,14 @@
                     {% endif %}
                     <div class="container py-10 mb-20 h-25vh text-sm font-normal pt-10">
                         <div class="font-normal justify-start">
-                            <div class="font-bold font text-4xl text-green-700 pb-10">기사제목 : {{book.articleTitle}}</div>
-                            <div class="w-7/12">기사내용 : {{book.articleExp}}</div>
+                            <div class="mb-5 font-bold text-2xl text-green-700 opacity-75">{{book.articleTitle}}</div>
+                            <div class="w-7/12">{{book.articleExp}}</div>
                         </div>
                     </div>
             {% endfor %}
             </div>
         </div>
+    </div>
 {% comment %} 페이징 처리 {% endcomment %}
 
 

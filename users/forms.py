@@ -16,7 +16,7 @@ book_choices = [
     ("literature", "문학, 비평"),
     ("Experiment", "주제, 실험"),
     ("magazine", "잡지"),
-    ("illustration","일러스트레이션, 회화, 만화"),
+    ("illustration","일러스트레이션"),
     ("Illustrated book","도감"),
     
 ]

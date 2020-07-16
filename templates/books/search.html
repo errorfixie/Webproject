@@ -12,31 +12,33 @@
     </div>
 
 
-        <div class="w=1/12 container absolute">
+        <div class="absolute">
             <div class="w-20 ml-10">
                 {% include 'books/category_base.html' %}
             </div>
         </div>
     
     <div>
-    <div class="px-5 ml-25vh w-full flex flex-wrap">
-                {% if book_search %}
-                {% for search in book_search %}
-                    <div class="container w-1/4 mb-5 mx-10 text-sm font-normal">
-                        {% if search.bookPic %}
-                            <div class="w-64 h-50vh bg-cover bg-center cursor-pointer" onclick="location.href='/books/{{search.id}}';" style="background-image: url({{search.bookPic.url}});"></div>
-                        {% endif %}
-                        <div class="container mb-5 text-sm font-normal ">
-                            <div class="font-thin justify-start">
-                                <div>{{search.bookTitle|truncatechars:25}}</div>
-                                <div>{{search.price}}원</div>
-                            </div>
-                        </div>                                                
-                    </div>
-                {% endfor %}
-            {% else %}
-                <div class="font-bold text-red-600 text-3xl px-50vh mb-50vh">도서가 존재하지 않습니다.</div>
-            {% endif %}
+    <div class="w-full">
+        <div class="px-5 ml-25vh flex flex-wrap">
+                    {% if book_search %}
+                    {% for search in book_search %}
+                        <div class="container w-1/4 mb-5 mx-10 text-sm font-normal">
+                            {% if search.bookPic %}
+                                <div class="w-64 h-50vh bg-cover bg-center cursor-pointer" onclick="location.href='/books/{{search.pk}}';" style="background-image: url({{search.bookPic.url}});"></div>
+                            {% endif %}
+                            <div class="container mb-5 text-sm font-normal ">
+                                <div class="font-thin justify-start">
+                                    <div>{{search.bookTitle|truncatechars:25}}</div>
+                                    <div>{{search.price}}원</div>
+                                </div>
+                            </div>                                                
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="font-bold text-red-600 text-3xl px-50vh mb-50vh">도서가 존재하지 않습니다.</div>
+                {% endif %}
+            </div>
         </div>
     </div>
 

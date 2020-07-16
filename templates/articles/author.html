@@ -4,9 +4,9 @@
 {% endblock title %}
 {% block content %}
 <div>
-    <div class="text-center mt-16 mb-10 font-medium text-xl self-center">
-        <div class="w-full mt-20">
-            <div class="flex-initial absolute ml-10 my-5">
+    <div class="text-center mb-10 font-medium text-xl self-center">
+        <div>
+            <div class="flex-initial absolute ml-10 my-5 text-center mb-24 font-medium text-xl self-center">
                 <a href = "{%url 'articles:author' %}">이달의작가</a><br>
                 <a href = "{%url 'articles:book' %}">이달의도서</a><br>
                 <a href = "{%url 'articles:event' %}">이달의행사</a><br>
@@ -14,17 +14,17 @@
         </div>
     </div>
 
-    <div>
-        <div class="px-5 ml-25vh pl-32 w-full">
+    <div class="w-full">
+        <div class="ml-25vh pl-32 pt-8">
             {% for author in author_list  %}
                 <div class="container w-2/4 mb-5 mx-10 text-sm font-normal">
                     {% if author.authorArticlePic %}
-                        <div class="w-50vh h-50vh bg-cover bg-center cursor-pointer"><a href = ""><img src = '{{ author.authorArticlePic.url }}' width='300',height='350'> </a></div>
+                        <div class="w-75vh h-50vh bg-cover bg-center cursor-pointer"><a href = ""><img src = '{{ author.authorArticlePic.url }}'> </a></div>
                     {% endif %}
-                    <div class="container mb-5 text-sm font-normal">
+                    <div class="container mb-5 text-sm font-normal mt-40">
                         <div class="font-normal justify-start">
-                            <div class="mb-5">기사제목 : {{author.articleTitle}}</div>
-                            <div>기사내용 : {{author.articleExp}}</div>
+                            <div class="mb-5 font-bold text-2xl text-green-700 opacity-75">{{author.articleTitle}}</div>
+                            <div>{{author.articleExp}}</div>
                         </div>
                 </div>
             {% endfor %}
@@ -35,7 +35,7 @@
 {% comment %} 페이징 처리 {% endcomment %}
     <div>
         {% if is_paginated %}
-        <p>
+        <p class="text-right">
         {% if has_previous_page %}
             <a href='/articles/author/?page={{previous_page}}'>이전</a>
         {% endif %}
